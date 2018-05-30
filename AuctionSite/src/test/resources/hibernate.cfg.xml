@@ -14,8 +14,10 @@
 		<!-- update by default -->
 		<property name="hibernate.hbm2ddl.auto">create</property>
 		<!-- locations of domain object mappings -->
-		<mapping class="com.revature.beans.Message"></mapping>
-		<mapping class="com.revature.beans.Vampire"></mapping>
+		<mapping class="beans.User"></mapping>
+		<mapping class="beans.Item"></mapping>
+		<mapping class="beans.BiddingHistory"></mapping>
+		<mapping class="beans.Transaction"></mapping>
 
 	</session-factory>
 </hibernate-configuration>
