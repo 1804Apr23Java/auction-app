@@ -2,6 +2,7 @@ package beans;
 
 import java.io.InputStream;
 import java.io.Serializable;
+import java.security.Timestamp;
 
 import javax.persistence.*;
 
@@ -10,8 +11,8 @@ public class Item implements Serializable {
 	private static final long serialVersionUID = 8936579050460853453L;
 
 
-	public Item(int id, String itemName, String timeLimit, String categoryTag, String description, InputStream image,
-			String currentPrice, String currentBuyer) {
+	public Item(int id, String itemName, Timestamp timeLimit, String categoryTag, String description, InputStream image,
+			double currentPrice, String currentBuyer) {
 		super();
 		this.id = id;
 		this.itemName = itemName;
@@ -23,8 +24,8 @@ public class Item implements Serializable {
 		this.currentBuyer = currentBuyer;
 	}
 
-	public Item(String itemName, String timeLimit, String categoryTag, String description, InputStream image,
-			String currentPrice, String currentBuyer) {
+	public Item(String itemName, Timestamp timeLimit, String categoryTag, String description, InputStream image,
+			double currentPrice, String currentBuyer) {
 		super();
 		this.itemName = itemName;
 		this.timeLimit = timeLimit;
@@ -49,7 +50,7 @@ public class Item implements Serializable {
 	private String itemName;
 
 	@Column(name = "TIME_LIMIT")
-	private String timeLimit;
+	private Timestamp timeLimit;
 
 	@Column(name = "CATEGORY_TAG")
 	private String categoryTag;
@@ -61,7 +62,7 @@ public class Item implements Serializable {
 	private InputStream image;
 
 	@Column(name = "CURRENT_PRICE")
-	private String currentPrice;
+	private double currentPrice;
 
 	@Column(name = "CURRENT_BUYER")
 	private String currentBuyer;
@@ -82,11 +83,11 @@ public class Item implements Serializable {
 		this.itemName = itemName;
 	}
 
-	public String getTimeLimit() {
+	public Timestamp getTimeLimit() {
 		return timeLimit;
 	}
 
-	public void setTimeLimit(String timeLimit) {
+	public void setTimeLimit(Timestamp timeLimit) {
 		this.timeLimit = timeLimit;
 	}
 
@@ -106,11 +107,11 @@ public class Item implements Serializable {
 		this.description = description;
 	}
 
-	public String getCurrentPrice() {
+	public double getCurrentPrice() {
 		return currentPrice;
 	}
 
-	public void setCurrentPrice(String currentPrice) {
+	public void setCurrentPrice(double currentPrice) {
 		this.currentPrice = currentPrice;
 	}
 
