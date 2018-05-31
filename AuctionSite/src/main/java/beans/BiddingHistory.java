@@ -41,19 +41,18 @@ public class BiddingHistory implements Serializable {
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name = "ITEM_ID")
+	@JoinColumn(name = "ITEM_ID", nullable=false)
 	private Item itemId;
 	
 	@ManyToOne
-	@JoinColumn(name = "BUYER_ID")
+	@JoinColumn(name = "BUYER_ID", nullable=false)
 	private User buyerId;
 	
-	@Column(name = "BADE_PRICE")
+	@Column(name = "BADE_PRICE", nullable=false)
 	private double badePrice;
 	
-	@Column(name = "TIME")
+	@Column(name = "TIME", nullable=false)
 	private Timestamp time;
-	//timestamp?
 
 	public int getId() {
 		return id;

@@ -48,23 +48,23 @@ public class Item implements Serializable {
 	@Column(name = "ITEM_ID")
 	private int id;
 
-	@Column(name = "ITEM_NAME")
+	@Column(name = "ITEM_NAME", nullable=false)
 	private String itemName;
 
-	@Column(name = "TIME_LIMIT")
+	@Column(name = "TIME_LIMIT", nullable=false)
 	private Timestamp timeLimit;
 
-	@Column(name = "CATEGORY_TAG")
+	@Column(name = "CATEGORY_TAG", nullable=false)
 	private String categoryTag;
 
-	@Column(name = "ITEM_DESCRIPTION")
+	@Column(name = "ITEM_DESCRIPTION", nullable=false)
 	private String description;
 	
-	@Column(name = "IMAGE")
+	@Column(name = "IMAGE", nullable=false)
 	private String image;
 
-	@Column(name = "CURRENT_PRICE")
-	private double currentPrice;
+	@Column(name = "CURRENT_PRICE", nullable=false)
+	private double currentPrice = 0.00;
 
 	@ManyToOne
 	@JoinColumn(name = "CURRENT_BUYER")

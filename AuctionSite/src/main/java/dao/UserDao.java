@@ -1,5 +1,6 @@
 package dao;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -10,26 +11,42 @@ public class UserDao implements UserInterface {
 
 	public int addUser(User u) {
 		Session s = HibernateUtil.getSession();
-		Transaction tx = s.beginTransaction(); //spooky
+		Transaction tx = s.beginTransaction();
+		//result returns pk of new user. 
 		int result = (Integer) s.save(u);
 		tx.commit();
 		s.close();
 		return result;
 	}
 
-	public int validateLogin() {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean validateLogin(User u) {
+		Session s = HibernateUtil.getSession();
+		//Transaction tx = s.beginTransaction();
+		Query query = s.createQuery("FROM User where username = :username and password = :password");
+		query.setString("username", u.getUsername());
+    	query.setString("password", u.getPassword());
+    	User user = (User) query.uniqueResult();
+							
+		s.close();
+		
+		if (user != null) {
+			System.out.println(user.getId());
+			System.out.println(user.toString());
+			return true;
+		}
+		else 
+			return false;
+			
 	}
 
-	public int validateManager() {
+	public boolean validateManager() {
 		// TODO Auto-generated method stub
-		return 0;
+		return false;
 	}
 
-	public int checkForBan() {
+	public boolean checkForBan() {
 		// TODO Auto-generated method stub
-		return 0;
+		return false;
 	}
 
 	public User getUserInfo() {
@@ -37,8 +54,4 @@ public class UserDao implements UserInterface {
 		return null;
 	}
 
-	public int addUser() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }

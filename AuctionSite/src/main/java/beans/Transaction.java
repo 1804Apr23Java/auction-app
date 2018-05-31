@@ -45,11 +45,11 @@ public class Transaction implements Serializable {
 	private int id;
 
 	@ManyToOne
-	@JoinColumn(name = "ITEM_ID")
+	@JoinColumn(name = "ITEM_ID", nullable=false)
 	private Item itemId;
 	
 	@ManyToOne
-	@JoinColumn(name = "SELLER_ID")
+	@JoinColumn(name = "SELLER_ID", nullable=false)
 	private User sellerId;
 	
 	@ManyToOne

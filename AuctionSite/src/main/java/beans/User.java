@@ -56,43 +56,43 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="userSequence")
 	@SequenceGenerator(allocationSize=1,name="userSequence",sequenceName="SQ_USER_PK")
-	@Column(name="USER_ID")
+	@Column(name="USER_ID", nullable=false)
 	private int id;
 	
-	@Column(name="USERNAME")
+	@Column(name="USERNAME", nullable=false)
 	private String username;
 	
-	@Column(name="PASSWORD")
+	@Column(name="PASSWORD", nullable=false)
 	private String password;
 
-	@Column(name="FIRST_NAME")
+	@Column(name="FIRST_NAME", nullable=false)
 	private String firstName;
 	
-	@Column(name="LAST_NAME")
+	@Column(name="LAST_NAME", nullable=false)
 	private String lastName;
 	
-	@Column(name="EMAIL")
+	@Column(name="EMAIL", nullable=false)
 	private String email;
 	
-	@Column(name="ADMIN_VALUE")
-	private int adminValue;
+	@Column(name="ADMIN_VALUE", nullable=false)
+	private int adminValue = 0;
 	
-	@Column(name="BANNED_CHECK")
-	private int bannedCheck;
+	@Column(name="BANNED_CHECK", nullable=false)
+	private int bannedCheck = 0;
 	
-	@Column(name="BALANCE")
-	private double balance;
+	@Column(name="BALANCE", nullable=false)
+	private double balance = 0.00;
 	
-	@Column(name="STREET")
+	@Column(name="STREET", nullable=false)
 	private String street;
 	
-	@Column(name="CITY")
+	@Column(name="CITY", nullable=false)
 	private String city;
 	
-	@Column(name="STATE")
+	@Column(name="STATE", nullable=false)
 	private String state;
 	
-	@Column(name="ZIP_CODE")
+	@Column(name="ZIP_CODE", nullable=false)
 	private String zipcode;
 
 
@@ -199,6 +199,14 @@ public class User implements Serializable {
 
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", email=" + email + ", adminValue=" + adminValue + ", bannedCheck="
+				+ bannedCheck + ", balance=" + balance + ", street=" + street + ", city=" + city + ", state=" + state
+				+ ", zipcode=" + zipcode + "]";
 	}
 
 
