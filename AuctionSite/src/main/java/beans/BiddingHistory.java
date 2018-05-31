@@ -49,7 +49,7 @@ public class BiddingHistory implements Serializable {
 	
 	@Column(name = "TIME")
 	private Timestamp time;
-
+	//timestamp?
 
 	public int getId() {
 		return id;
