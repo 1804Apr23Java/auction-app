@@ -14,5 +14,6 @@ public interface UserInterface {
 
 	public User getUserInfo();
 	
-	
+
+	public int addUser(User u);
 }

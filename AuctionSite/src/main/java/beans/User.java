@@ -4,16 +4,18 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 @Entity
-@Table(name="USER")
+@DynamicUpdate
+@Table(name="USERS")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = -6686626961005563005L;
 
-
 	
 	public User(int id, String username, String password, String firstName, String lastName, String email,
-			int adminValue, int bannedCheck, int balance, int street, int city, int state, int zipcode) {
+			int adminValue, int bannedCheck, double balance, String street, String city, String state, String zipcode) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -31,7 +33,7 @@ public class User implements Serializable {
 	}
 	
 	public User(String username, String password, String firstName, String lastName, String email,
-			int adminValue, int bannedCheck, int balance, int street, int city, int state, int zipcode) {
+			int adminValue, int bannedCheck, double balance, String street, String city, String state, String zipcode) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -79,19 +81,21 @@ public class User implements Serializable {
 	private int bannedCheck;
 	
 	@Column(name="BALANCE")
-	private int balance;
+	private double balance;
 	
 	@Column(name="STREET")
-	private int street;
+	private String street;
 	
 	@Column(name="CITY")
-	private int city;
+	private String city;
 	
 	@Column(name="STATE")
-	private int state;
+	private String state;
 	
 	@Column(name="ZIP_CODE")
-	private int zipcode;
+	private String zipcode;
+
+
 
 	public int getId() {
 		return id;
@@ -157,45 +161,45 @@ public class User implements Serializable {
 		this.bannedCheck = bannedCheck;
 	}
 
-	public int getBalance() {
+	public double getBalance() {
 		return balance;
 	}
 
-	public void setBalance(int balance) {
+	public void setBalance(double balance) {
 		this.balance = balance;
 	}
 
-	public int getStreet() {
+	public String getStreet() {
 		return street;
 	}
 
-	public void setStreet(int street) {
+	public void setStreet(String street) {
 		this.street = street;
 	}
 
-	public int getCity() {
+	public String getCity() {
 		return city;
 	}
 
-	public void setCity(int city) {
+	public void setCity(String city) {
 		this.city = city;
 	}
 
-	public int getState() {
+	public String getState() {
 		return state;
 	}
 
-	public void setState(int state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 
-	public int getZipcode() {
+	public String getZipcode() {
 		return zipcode;
 	}
 
-	public void setZipcode(int zipcode) {
+	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
-	
-	
+
+
 }

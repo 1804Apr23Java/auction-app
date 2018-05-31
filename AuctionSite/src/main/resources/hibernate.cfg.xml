@@ -4,15 +4,15 @@
 "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<property name="Project2"></property>
-		<property name="auction"></property>
-		<property name="revaturedatabase5562.ctlwui5soyig.us-east-2.rds.amazonaws.com"></property>
+		<property name="hibernate.connection.username"></property>
+		<property name="hibernate.connection.password"></property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@revaturedatabase5562.ctlwui5soyig.us-east-2.rds.amazonaws.com:1521:ORCL</property>
 		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
 		<!-- this can be useful during development but very noisy in the console -->
 		<property name="hibernate.show_sql">true</property>
 		<!-- choose whether to create db or update existing ddl -->
 		<!-- update by default -->
-		<property name="hibernate.hbm2ddl.auto">create</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
 		<!-- locations of domain object mappings -->
 		<mapping class="beans.User"></mapping>
 		<mapping class="beans.Item"></mapping>

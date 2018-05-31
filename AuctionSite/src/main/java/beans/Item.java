@@ -1,18 +1,20 @@
 package beans;
 
-import java.io.InputStream;
+
 import java.io.Serializable;
 import java.security.Timestamp;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name="ITEM")
 public class Item implements Serializable {
 
 	private static final long serialVersionUID = 8936579050460853453L;
 
 
-	public Item(int id, String itemName, Timestamp timeLimit, String categoryTag, String description, InputStream image,
-			double currentPrice, String currentBuyer) {
+	public Item(int id, String itemName, Timestamp timeLimit, String categoryTag, String description, String image,
+			double currentPrice, User currentBuyer) {
 		super();
 		this.id = id;
 		this.itemName = itemName;
@@ -24,8 +26,8 @@ public class Item implements Serializable {
 		this.currentBuyer = currentBuyer;
 	}
 
-	public Item(String itemName, Timestamp timeLimit, String categoryTag, String description, InputStream image,
-			double currentPrice, String currentBuyer) {
+	public Item(String itemName, Timestamp timeLimit, String categoryTag, String description, String image,
+			double currentPrice, User currentBuyer) {
 		super();
 		this.itemName = itemName;
 		this.timeLimit = timeLimit;
@@ -59,13 +61,14 @@ public class Item implements Serializable {
 	private String description;
 	
 	@Column(name = "IMAGE")
-	private InputStream image;
+	private String image;
 
 	@Column(name = "CURRENT_PRICE")
 	private double currentPrice;
 
-	@Column(name = "CURRENT_BUYER")
-	private String currentBuyer;
+	@ManyToOne
+	@JoinColumn(name = "CURRENT_BUYER")
+	private User currentBuyer;
 
 	public int getId() {
 		return id;
@@ -115,11 +118,11 @@ public class Item implements Serializable {
 		this.currentPrice = currentPrice;
 	}
 
-	public String getCurrentBuyer() {
+	public User getCurrentBuyer() {
 		return currentBuyer;
 	}
 
-	public void setCurrentBuyer(String currentBuyer) {
+	public void setCurrentBuyer(User currentBuyer) {
 		this.currentBuyer = currentBuyer;
 	}
 

@@ -5,12 +5,14 @@ import java.security.Timestamp;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name="BIDDING_HISTORY")
 public class BiddingHistory implements Serializable {
 
 	private static final long serialVersionUID = -8347365985841545839L;
 	
 	
-	public BiddingHistory(int id, int itemId, int buyerId, double badePrice, Timestamp time) {
+	public BiddingHistory(int id, Item itemId, User buyerId, double badePrice, Timestamp time) {
 		super();
 		this.id = id;
 		this.itemId = itemId;
@@ -19,7 +21,7 @@ public class BiddingHistory implements Serializable {
 		this.time = time;
 	}
 	
-	public BiddingHistory(int itemId, int buyerId, double badePrice, Timestamp time) {
+	public BiddingHistory(Item itemId, User buyerId, double badePrice, Timestamp time) {
 		super();
 		this.itemId = itemId;
 		this.buyerId = buyerId;
@@ -38,11 +40,13 @@ public class BiddingHistory implements Serializable {
 	@Column(name = "BIDDING_ID")
 	private int id;
 	
-	@Column(name = "ITEM_ID")
-	private int itemId;
+	@ManyToOne
+	@JoinColumn(name = "ITEM_ID")
+	private Item itemId;
 	
-	@Column(name = "BUYER_ID")
-	private int buyerId;
+	@ManyToOne
+	@JoinColumn(name = "BUYER_ID")
+	private User buyerId;
 	
 	@Column(name = "BADE_PRICE")
 	private double badePrice;
@@ -59,19 +63,19 @@ public class BiddingHistory implements Serializable {
 		this.id = id;
 	}
 
-	public int getItemId() {
+	public Item getItemId() {
 		return itemId;
 	}
 
-	public void setItemId(int itemId) {
+	public void setItemId(Item itemId) {
 		this.itemId = itemId;
 	}
 
-	public int getBuyerId() {
+	public User getBuyerId() {
 		return buyerId;
 	}
 
-	public void setBuyerId(int buyerId) {
+	public void setBuyerId(User buyerId) {
 		this.buyerId = buyerId;
 	}
 

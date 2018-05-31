@@ -4,13 +4,15 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name="TRANSACTION")
 public class Transaction implements Serializable {
 
 	private static final long serialVersionUID = -3515915628132960776L;
 	
 	
 	
-	public Transaction(int id, int itemId, int sellerId, int buyerId, int sellerRating,
+	public Transaction(int id, Item itemId, User sellerId, User buyerId, int sellerRating,
 			String sellerReview) {
 		super();
 		this.id = id;
@@ -21,7 +23,7 @@ public class Transaction implements Serializable {
 		this.sellerReview = sellerReview;
 	}
 	
-	public Transaction(int itemId, int sellerId, int buyerId, int sellerRating,
+	public Transaction(Item itemId, User sellerId, User buyerId, int sellerRating,
 			String sellerReview) {
 		super();
 		this.itemId = itemId;
@@ -42,14 +44,17 @@ public class Transaction implements Serializable {
 	@Column(name = "TRANSACTION_ID")
 	private int id;
 
-	@Column(name = "ITEM_ID")
-	private int itemId;
+	@ManyToOne
+	@JoinColumn(name = "ITEM_ID")
+	private Item itemId;
 	
-	@Column(name = "SELLER_ID")
-	private int sellerId;
+	@ManyToOne
+	@JoinColumn(name = "SELLER_ID")
+	private User sellerId;
 	
-	@Column(name = "BUYER_ID")
-	private int buyerId;
+	@ManyToOne
+	@JoinColumn(name = "BUYER_ID")
+	private User buyerId;
 	
 	@Column(name = "SELLER_RATING")
 	private int sellerRating;
@@ -67,27 +72,27 @@ public class Transaction implements Serializable {
 		this.id = id;
 	}
 
-	public int getItemId() {
+	public Item getItemId() {
 		return itemId;
 	}
 
-	public void setItemId(int itemId) {
+	public void setItemId(Item itemId) {
 		this.itemId = itemId;
 	}
 
-	public int getSellerId() {
+	public User getSellerId() {
 		return sellerId;
 	}
 
-	public void setSellerId(int sellerId) {
+	public void setSellerId(User sellerId) {
 		this.sellerId = sellerId;
 	}
 
-	public int getBuyerId() {
+	public User getBuyerId() {
 		return buyerId;
 	}
 
-	public void setBuyerId(int buyerId) {
+	public void setBuyerId(User buyerId) {
 		this.buyerId = buyerId;
 	}
 
