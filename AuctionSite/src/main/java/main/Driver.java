@@ -16,14 +16,18 @@ public class Driver {
 		
 		UserInterface ui = new UserDao();
         
-		User u = new User(11, "testname6", "testpassword6", "testfirst6", "testlast6", "test6@mail.com",
-			0, 0, 800.00, "teststreet6", "testcity6", "teststate6", "testzip6");
+		User u = new User(4, "testname", "testpassword", "testfirst", "testlast", "test@mail.com",
+			0, 0, 800.00, "teststreet", "testcity", "teststate", "testzip");
 		
-		int i = ui.addUser(u);
+		//int i = ui.addUser(u);
 		
-		System.out.println(i);
-		
-		Boolean x = ui.validateLogin(u);
-		System.out.println(x);
+		//System.out.println(i);
+		User up = new User(5, "4", "4", "4", "4", "4",
+				0, 0, 800.00, "4", "4", "4", "4");
+		ui.updateUserInfo(up);
+		//User x = ui.getUserInfo(u);
+		//System.out.println(x.toString());
+		//System.out.println(u.getId());
+		//ui.deleteUser(u);
 	}
 }

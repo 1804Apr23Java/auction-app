@@ -19,39 +19,35 @@ public class UserDao implements UserInterface {
 		return result;
 	}
 
-	public boolean validateLogin(User u) {
+	public User getUserInfo(User u) {
+		User user = null;
 		Session s = HibernateUtil.getSession();
-		//Transaction tx = s.beginTransaction();
 		Query query = s.createQuery("FROM User where username = :username and password = :password");
 		query.setString("username", u.getUsername());
     	query.setString("password", u.getPassword());
-    	User user = (User) query.uniqueResult();
-							
+    	user = (User) query.uniqueResult();				
 		s.close();
 		
-		if (user != null) {
-			System.out.println(user.getId());
-			System.out.println(user.toString());
-			return true;
-		}
-		else 
-			return false;
+		return user;
 			
 	}
 
-	public boolean validateManager() {
-		// TODO Auto-generated method stub
+	public boolean updateUserInfo(User u) {
+		Session s = HibernateUtil.getSession();
+		s.merge(u);
+		s.close();
 		return false;
 	}
 
-	public boolean checkForBan() {
-		// TODO Auto-generated method stub
+	public boolean deleteUser(User u) {
+		Session s = HibernateUtil.getSession();
+		Transaction tx = s.beginTransaction();
+		User user = (User) s.load(User.class, 4);
+		System.out.println(user.toString());
+		s.delete(user);
+		tx.commit();
+		s.close();
 		return false;
-	}
-
-	public User getUserInfo() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
