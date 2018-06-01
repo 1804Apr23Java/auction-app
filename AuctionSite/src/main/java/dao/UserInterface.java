@@ -4,17 +4,17 @@ import beans.User;
 
 public interface UserInterface {
 
-	//Check all three during login and redirect according to the returned int value
-	public boolean validateLogin(User u);
-	
-	public boolean validateManager();
-	
-	public boolean checkForBan();
-	
-
-	//Used to check own info or other user's info
-	public User getUserInfo();
+	//Use for any functionality regarding user
+	public User getUserInfo(User u);
 	
 	//user can create a new account
 	public int addUser(User u);
+
+	//Use for any updates regarding user: banning, increase/decrease balance, change userinfo/password etc..
+	public boolean updateUserInfo(User u);
+	
+	//Use for supers, but maybe want to archive?
+	public boolean deleteUser(User u);
+	
+	
 }
