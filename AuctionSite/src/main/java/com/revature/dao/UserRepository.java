@@ -1,14 +1,27 @@
-package dao;
+package com.revature.dao;
+
+import javax.transaction.Transactional;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+//import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+//import org.springframework.transaction.annotation.Transactional;
 
-import beans.User;
-import util.HibernateUtil;
+import com.revature.beans.User;
+import com.revature.util.HibernateUtil;
 
-public class UserDao implements UserInterface {
+@Repository(value="userRepository")
+@Transactional
+@EnableTransactionManagement
+public class UserRepository {
 
+	@Autowired
+	SessionFactory sessionFactory;
 	public int addUser(User u) {
 		Session s = HibernateUtil.getSession();
 		Transaction tx = s.beginTransaction();
@@ -23,9 +36,11 @@ public class UserDao implements UserInterface {
 		User user = null;
 		Session s = HibernateUtil.getSession();
 		Query query = s.createQuery("FROM User where username = :username and password = :password");
-		query.setString("username", u.getUsername());
-    	query.setString("password", u.getPassword());
-    	user = (User) query.uniqueResult();				
+		query.setString("username", "testname1");//u.getUsername());
+    	query.setString("password", "testpassword");//u.getPassword());
+    	user = (User) query.uniqueResult();	
+    	System.out.println(" ");
+    	System.out.println(user.toString());
 		s.close();
 		
 		return user;
