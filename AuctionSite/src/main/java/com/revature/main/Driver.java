@@ -1,8 +1,7 @@
-package main;
+package com.revature.main;
 
-import beans.User;
-import dao.UserDao;
-import dao.UserInterface;
+import com.revature.beans.User;
+import com.revature.dao.UserRepository;
 /*
 import java.util.List;
 
@@ -14,7 +13,7 @@ public class Driver {
 
 	public static void main(String[] args) {
 		
-		UserInterface ui = new UserDao();
+		UserRepository ui = new UserRepository();
         
 		User u = new User(4, "testname", "testpassword", "testfirst", "testlast", "test@mail.com",
 			0, 0, 800.00, "teststreet", "testcity", "teststate", "testzip");
@@ -25,8 +24,8 @@ public class Driver {
 		User up = new User(5, "4", "4", "4", "4", "4",
 				0, 0, 800.00, "4", "4", "4", "4");
 		ui.updateUserInfo(up);
-		//User x = ui.getUserInfo(u);
-		//System.out.println(x.toString());
+		User x = ui.getUserInfo(u);
+		System.out.println(x.toString());
 		//System.out.println(u.getId());
 		//ui.deleteUser(u);
 	}

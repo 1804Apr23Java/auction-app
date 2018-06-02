@@ -64,3 +64,25 @@
 2018-05-31 23:50:39 ERROR SchemaUpdate:261 - HHH000388: Unsuccessful: alter table USERS add ZIP_CODE varchar2(255 char) not null
 2018-05-31 23:50:39 ERROR SchemaUpdate:262 - ORA-01430: column being added already exists in table
 
+2018-06-01 08:57:19 WARN  DriverManagerConnectionProviderImpl:93 - HHH000402: Using Hibernate built-in connection pool (not for production use!)
+2018-06-01 08:57:26 ERROR SchemaUpdate:261 - HHH000388: Unsuccessful: alter table USERS add ADMIN_VALUE number(10,0) not null
+2018-06-01 08:57:26 ERROR SchemaUpdate:262 - ORA-01430: column being added already exists in table
+
+2018-06-01 08:57:26 ERROR SchemaUpdate:261 - HHH000388: Unsuccessful: alter table USERS add BALANCE double precision not null
+2018-06-01 08:57:26 ERROR SchemaUpdate:262 - ORA-01430: column being added already exists in table
+
+2018-06-01 08:57:26 ERROR SchemaUpdate:261 - HHH000388: Unsuccessful: alter table USERS add BANNED_CHECK number(10,0) not null
+2018-06-01 08:57:26 ERROR SchemaUpdate:262 - ORA-01430: column being added already exists in table
+
+2018-06-01 08:57:27 ERROR SchemaUpdate:261 - HHH000388: Unsuccessful: alter table USERS add CITY varchar2(255 char) not null
+2018-06-01 08:57:27 ERROR SchemaUpdate:262 - ORA-01430: column being added already exists in table
+
+2018-06-01 08:57:27 ERROR SchemaUpdate:261 - HHH000388: Unsuccessful: alter table USERS add STATE varchar2(255 char) not null
+2018-06-01 08:57:27 ERROR SchemaUpdate:262 - ORA-01430: column being added already exists in table
+
+2018-06-01 08:57:27 ERROR SchemaUpdate:261 - HHH000388: Unsuccessful: alter table USERS add STREET varchar2(255 char) not null
+2018-06-01 08:57:27 ERROR SchemaUpdate:262 - ORA-01430: column being added already exists in table
+
+2018-06-01 08:57:27 ERROR SchemaUpdate:261 - HHH000388: Unsuccessful: alter table USERS add ZIP_CODE varchar2(255 char) not null
+2018-06-01 08:57:27 ERROR SchemaUpdate:262 - ORA-01430: column being added already exists in table
+
