@@ -1,25 +1,22 @@
-package com.revature.dao;
+package com.revature.repository;
 
 import javax.transaction.Transactional;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-//import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-//import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.beans.User;
 import com.revature.util.HibernateUtil;
 
-@Repository(value="userRepository")
+@Repository(value="biddingHistoryRepository")
 @Transactional
 @EnableTransactionManagement
-public class UserRepository {
-
+public class BiddingHistoryRepository {
 	@Autowired
 	SessionFactory sessionFactory;
 	public int addUser(User u) {
@@ -64,5 +61,4 @@ public class UserRepository {
 		s.close();
 		return false;
 	}
-
 }

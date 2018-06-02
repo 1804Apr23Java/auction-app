@@ -16,7 +16,7 @@
 		<mapping class="com.revature.beans.User"></mapping>
 		<mapping class="com.revature.beans.Item"></mapping>
 		<mapping class="com.revature.beans.BiddingHistory"></mapping>
-		<mapping class="com.revature.beans.Transaction"></mapping>
+		<mapping class="com.revature.beans.ItemTransaction"></mapping>
 
 	</session-factory>
 </hibernate-configuration>

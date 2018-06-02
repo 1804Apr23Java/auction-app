@@ -1,5 +1,7 @@
 package com.revature.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,12 +22,40 @@ public class UserController {
 	private UserService userService;
 	
 	//@RequestMapping(method = RequestMethod.GET)
-	@RequestMapping("/userinfo")
+	@RequestMapping("/login")
 	@ResponseBody
-	public ResponseEntity<User> getUserData(User u) {
-		//u.setUsername("testname1");
-		//u.setPassword("testpassword");
-		return new ResponseEntity<>(userService.getUserInfo(u), HttpStatus.OK);
+	public ResponseEntity<User> loginUserAccount(User u) {
+		u.setUsername("testname1");
+		u.setPassword("testpassword");
+		return new ResponseEntity<>(userService.login(u), HttpStatus.OK);
+	}
+	
+	@RequestMapping("/checkuser")
+	@ResponseBody
+	public ResponseEntity<User> checkUserAccount(User u) {
+		u.setUsername("test");
+		return new ResponseEntity<>(userService.checkUser(u), HttpStatus.OK);
+	}
+	
+	@RequestMapping("/adduser")
+	@ResponseBody
+	public ResponseEntity<Integer> createNewAccount(User u) {
+		u = new User("controller", "test", "testfirst", "testlast", "test@mail.com",
+				0, 0, 800.00, "teststreet", "testcity", "teststate", "testzip");
+		return new ResponseEntity<>(userService.addUser(u), HttpStatus.OK);
+	}
+	
+	@RequestMapping("/delete")
+	@ResponseBody
+	public ResponseEntity<Boolean> deleteAccount(User u) {
+		u.setId(21);
+		return new ResponseEntity<>(userService.deleteUser(u), HttpStatus.OK);
+	}
+	
+	@RequestMapping("/banned")
+	@ResponseBody
+	public ResponseEntity<List<User>> notBannedAccount() {
+		return new ResponseEntity<>(userService.getAllUsersByBan(), HttpStatus.OK);
 	}
 
 }

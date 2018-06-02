@@ -4,13 +4,15 @@ import static org.junit.Assert.*;
 
 import javax.transaction.Transactional;
 
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
 import org.junit.Test;
 
 import com.revature.beans.User;
-import com.revature.dao.UserRepository;
+import com.revature.repository.UserRepository;
 
 
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @Transactional
 public class UserH2Test {
 	
@@ -30,38 +32,33 @@ public class UserH2Test {
 	 */
 
 	private UserRepository ui = new UserRepository();
-	User user = new User(4, "testname", "testpassword", "testfirst", "testlast", "test@mail.com",
+	User user = new User("testname", "testpassword", "testfirst", "testlast", "test@mail.com",
 			0, 0, 800.00, "teststreet", "testcity", "teststate", "testzip");
-	
-	User user2 = new User(4, "testname2", "testpassword2", "testfirst2", "testlast2", "test2@mail.com",
-			0, 0, 800.00, "teststreet2", "testcity2", "teststate2", "testzip2");
-	
 
 	@Test
 	public void testAddUserPK() {
 		int i = ui.addUser(user);
 		assertEquals(i, 1);
 	}
-	
-	@Test
-	public void testFalsePk() {
-		int i = ui.addUser(user2);
-		assertFalse(i == 4);
-	}
-	
+
 	@Test
 	public void testGetUserInfo() {
-		fail("Not yet implemented");
+		User u = ui.loginUserInfo(user);
+		user.setId(1);
+		assertEquals(user.toString(), u.toString());
 	}
 	
 	@Test
 	public void testUpdateUserInfo() {
-		fail("Not yet implemented");
+		user.setBalance(1600);
+		ui.updateUserInfo(user);
+		User u = ui.loginUserInfo(user);
+		assertTrue(u.getBalance() == 1600);
 	}
-	
+
 	@Test
 	public void testDeleteUser() {
-		fail("Not yet implemented");
+		assertTrue(ui.deleteUser(user));
 	}
 
 }

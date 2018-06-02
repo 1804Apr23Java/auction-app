@@ -13,8 +13,9 @@ public class Item implements Serializable {
 	private static final long serialVersionUID = 8936579050460853453L;
 
 
+	
 	public Item(int id, String itemName, Timestamp timeLimit, String categoryTag, String description, String image,
-			double currentPrice, User currentBuyer) {
+			double currentPrice, String sellerId, User currentBuyer) {
 		super();
 		this.id = id;
 		this.itemName = itemName;
@@ -23,11 +24,12 @@ public class Item implements Serializable {
 		this.description = description;
 		this.image = image;
 		this.currentPrice = currentPrice;
+		this.sellerId = sellerId;
 		this.currentBuyer = currentBuyer;
 	}
-
+	
 	public Item(String itemName, Timestamp timeLimit, String categoryTag, String description, String image,
-			double currentPrice, User currentBuyer) {
+			double currentPrice, String sellerId, User currentBuyer) {
 		super();
 		this.itemName = itemName;
 		this.timeLimit = timeLimit;
@@ -35,9 +37,10 @@ public class Item implements Serializable {
 		this.description = description;
 		this.image = image;
 		this.currentPrice = currentPrice;
+		this.sellerId = sellerId;
 		this.currentBuyer = currentBuyer;
 	}
-	
+
 	public Item() {
 		super();
 	}
@@ -57,6 +60,8 @@ public class Item implements Serializable {
 	@Column(name = "CATEGORY_TAG", nullable=false)
 	private String categoryTag;
 
+
+	
 	@Column(name = "ITEM_DESCRIPTION", nullable=false)
 	private String description;
 	
@@ -66,6 +71,9 @@ public class Item implements Serializable {
 	@Column(name = "CURRENT_PRICE", nullable=false)
 	private double currentPrice = 0.00;
 
+	@Column(name = "SELLER_ID", nullable=false)
+	private String sellerId;
+	
 	@ManyToOne
 	@JoinColumn(name = "CURRENT_BUYER")
 	private User currentBuyer;
@@ -124,6 +132,29 @@ public class Item implements Serializable {
 
 	public void setCurrentBuyer(User currentBuyer) {
 		this.currentBuyer = currentBuyer;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getSellerId() {
+		return sellerId;
+	}
+
+	public void setSellerId(String sellerId) {
+		this.sellerId = sellerId;
+	}
+
+	@Override
+	public String toString() {
+		return "Item [id=" + id + ", itemName=" + itemName + ", timeLimit=" + timeLimit + ", categoryTag=" + categoryTag
+				+ ", description=" + description + ", image=" + image + ", currentPrice=" + currentPrice + ", sellerId="
+				+ sellerId + ", currentBuyer=" + currentBuyer + "]";
 	}
 
 }

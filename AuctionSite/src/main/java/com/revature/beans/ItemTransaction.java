@@ -6,13 +6,13 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="TRANSACTION")
-public class Transaction implements Serializable {
+public class ItemTransaction implements Serializable {
 
 	private static final long serialVersionUID = -3515915628132960776L;
 	
 	
 	
-	public Transaction(int id, Item itemId, User sellerId, User buyerId, int sellerRating,
+	public ItemTransaction(int id, Item itemId, User sellerId, User buyerId, int sellerRating,
 			String sellerReview) {
 		super();
 		this.id = id;
@@ -23,7 +23,7 @@ public class Transaction implements Serializable {
 		this.sellerReview = sellerReview;
 	}
 	
-	public Transaction(Item itemId, User sellerId, User buyerId, int sellerRating,
+	public ItemTransaction(Item itemId, User sellerId, User buyerId, int sellerRating,
 			String sellerReview) {
 		super();
 		this.itemId = itemId;
@@ -33,7 +33,7 @@ public class Transaction implements Serializable {
 		this.sellerReview = sellerReview;
 	}
 	
-	public Transaction() {
+	public ItemTransaction() {
 		super();
 
 	}

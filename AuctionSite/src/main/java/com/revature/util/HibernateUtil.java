@@ -16,7 +16,7 @@ public class HibernateUtil {
 			Configuration c = new Configuration().configure(filename);
 			c.setProperty("hibernate.connection.username", "Project2");
 			c.setProperty("hibernate.connection.password", "auction");
-			//c.setProperty("hibernate.connection.url", "revaturedatabase5562.ctlwui5soyig.us-east-2.rds.amazonaws.com");
+			//c.setProperty("hibernate.connection.url", "jdbc:oracle:thin:@revaturedatabase5562.ctlwui5soyig.us-east-2.rds.amazonaws.com");
 			ServiceRegistry sr = new StandardServiceRegistryBuilder().applySettings(c.getProperties()).build();
 			HibernateUtil.sessionFactory = c.buildSessionFactory(sr);
 		}
