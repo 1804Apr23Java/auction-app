@@ -39,4 +39,9 @@ public class UserService {
 		List<User> x = ur.getAllBannedUsers();
 		return x;
 	}
+	
+	public List<User> getAllUsers() {
+		List<User> x = ur.getUsers();
+		return x;
+	}
 }

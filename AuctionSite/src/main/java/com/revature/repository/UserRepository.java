@@ -1,5 +1,6 @@
 package com.revature.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -36,6 +37,13 @@ public class UserRepository {
 		tx.commit();
 		s.close();
 		return result;
+	}
+	
+	public List<User> getUsers() {
+		List<User> users = new ArrayList<User>();
+		Session s = sessionFactory.getCurrentSession();
+		users = s.createQuery("from User").list();
+		return users;
 	}
 
 	public User loginUserInfo(User u) {

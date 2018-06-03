@@ -15,7 +15,7 @@ public class Item implements Serializable {
 
 	
 	public Item(int id, String itemName, Timestamp timeLimit, String categoryTag, String description, String image,
-			double currentPrice, String sellerId, User currentBuyer) {
+			double currentPrice, int sellerId, User currentBuyer) {
 		super();
 		this.id = id;
 		this.itemName = itemName;
@@ -29,7 +29,7 @@ public class Item implements Serializable {
 	}
 	
 	public Item(String itemName, Timestamp timeLimit, String categoryTag, String description, String image,
-			double currentPrice, String sellerId, User currentBuyer) {
+			double currentPrice, int sellerId, User currentBuyer) {
 		super();
 		this.itemName = itemName;
 		this.timeLimit = timeLimit;
@@ -54,7 +54,7 @@ public class Item implements Serializable {
 	@Column(name = "ITEM_NAME", nullable=false)
 	private String itemName;
 
-	@Column(name = "TIME_LIMIT", nullable=false)
+	@Column(name = "TIME_LIMIT", nullable=true)
 	private Timestamp timeLimit;
 
 	@Column(name = "CATEGORY_TAG", nullable=false)
@@ -72,7 +72,7 @@ public class Item implements Serializable {
 	private double currentPrice = 0.00;
 
 	@Column(name = "SELLER_ID", nullable=false)
-	private String sellerId;
+	private int sellerId;
 	
 	@ManyToOne
 	@JoinColumn(name = "CURRENT_BUYER")
@@ -142,11 +142,11 @@ public class Item implements Serializable {
 		this.image = image;
 	}
 
-	public String getSellerId() {
+	public int getSellerId() {
 		return sellerId;
 	}
 
-	public void setSellerId(String sellerId) {
+	public void setSellerId(int sellerId) {
 		this.sellerId = sellerId;
 	}
 
