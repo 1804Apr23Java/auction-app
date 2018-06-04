@@ -48,6 +48,14 @@ public class ItemRepository {
 		List<Item> results = cr.list();
 		return results;
 	}
+	
+	public List<Item> getAllItemsByCategory(String category) {
+		Session s = sessionFactory.getCurrentSession();
+		Criteria cr = s.createCriteria(Item.class);
+		cr.add(Restrictions.eq("categoryTag", category)).list();
+		List<Item> results = cr.list();
+		return results;
+	}
 
 	public boolean updateItem(Item i) {
 		Session s = sessionFactory.getCurrentSession();

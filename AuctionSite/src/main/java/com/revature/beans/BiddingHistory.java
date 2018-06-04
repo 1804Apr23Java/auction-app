@@ -93,6 +93,12 @@ public class BiddingHistory implements Serializable {
 	public void setTime(Timestamp time) {
 		this.time = time;
 	}
+
+	@Override
+	public String toString() {
+		return "BiddingHistory [id=" + id + ", itemId=" + itemId + ", buyerId=" + buyerId + ", badePrice=" + badePrice
+				+ ", time=" + time + "]";
+	}
 	
 	
 }

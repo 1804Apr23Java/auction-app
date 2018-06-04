@@ -26,13 +26,14 @@ public class UserRepository {
 	@Autowired
 	SessionFactory sessionFactory;
 
-	// result returns pk of new user.
+	//New user can create an account, result returns pk of new user.
 	public int addUser(User u) {
 		Session s = sessionFactory.getCurrentSession();
 		int result = (Integer) s.save(u);
 		return result;
 	}
 
+	//For Superusers, get all users
 	public List<User> getUsers() {
 		List<User> users = new ArrayList<User>();
 		Session s = sessionFactory.getCurrentSession();
@@ -40,6 +41,7 @@ public class UserRepository {
 		return users;
 	}
 
+	//Used to login and get own user information
 	public User loginUserInfo(User u) {
 		User user = null;
 		Session s = sessionFactory.getCurrentSession();
@@ -50,7 +52,19 @@ public class UserRepository {
 		return user;
 
 	}
+	
+	//Used to get user information via primary key
+	public User userInfoViaKey(User u) {
+		System.out.println(u.getId());
+		Session s = sessionFactory.getCurrentSession();
+		Query query = s.createQuery("FROM User where id = :id");
+		query.setInteger("id", u.getId());
+		User user = (User) query.uniqueResult();
+		return user;
 
+	}
+
+	//Used to check a user's info that's not their own
 	public User checkUserInfo(User u) {
 		User user = null;
 		Session s = sessionFactory.getCurrentSession();
@@ -61,6 +75,7 @@ public class UserRepository {
 
 	}
 
+	//For Superusers, get all banned accounds
 	public List<User> getAllBannedUsers() {
 		Session s = sessionFactory.getCurrentSession();
 		Criteria cr = s.createCriteria(User.class);
@@ -69,6 +84,7 @@ public class UserRepository {
 		return results;
 	}
 
+	//For users to update their own user information
 	public boolean updateUserInfo(User u) {
 		Session s = sessionFactory.getCurrentSession();
 		try {
@@ -79,6 +95,7 @@ public class UserRepository {
 		}
 	}
 
+	//For Superusers (and possibly users), can delete (maybe one's own)accounts
 	public boolean deleteUser(User u) {
 		Session s = sessionFactory.getCurrentSession();
 		try {

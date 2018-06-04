@@ -23,6 +23,7 @@ public class ItemTransactionRepository {
 	
 	public int createTransaction(ItemTransaction t) {
 		Session s = sessionFactory.getCurrentSession();
+		System.out.println(t.toString());
 		//result returns pk of new item. 
 		int result = (Integer) s.save(t);
 		return result;

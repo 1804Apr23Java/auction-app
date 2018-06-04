@@ -111,6 +111,12 @@ public class ItemTransaction implements Serializable {
 	public void setSellerReview(String sellerReview) {
 		this.sellerReview = sellerReview;
 	}
+
+	@Override
+	public String toString() {
+		return "ItemTransaction [id=" + id + ", itemId=" + itemId + ", sellerId=" + sellerId + ", buyerId=" + buyerId
+				+ ", sellerRating=" + sellerRating + ", sellerReview=" + sellerReview + "]";
+	}
 	
 	
 }

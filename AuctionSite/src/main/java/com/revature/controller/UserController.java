@@ -29,17 +29,12 @@ public class UserController {
 	@RequestMapping("/login")
 	@ResponseBody
 	public ResponseEntity<User> loginUserAccount(HttpSession session, User u) throws Exception {
-		//u.setUsername("testname1");
-		//u.setPassword("testpassword");
-		System.out.println(u.toString());
-		System.out.println("              ");
 		User user = userService.login(u);
 		if (user !=null) {
-			//HttpSession session = ..getSession(false);
 			session.setAttribute("userId", user.getId());
 		}
 		else {
-			throw new Exception("Invalid username or passwords");
+			throw new Exception("Invalid username or password");
 		}
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
@@ -54,22 +49,20 @@ public class UserController {
 	@RequestMapping("/checkuser")
 	@ResponseBody
 	public ResponseEntity<User> checkUserAccount(User u) {
-		u.setUsername("test");
+		u.setUsername("testname3"); //used for testing, remove once username param is passed
 		return new ResponseEntity<>(userService.checkUser(u), HttpStatus.OK);
 	}
 	
 	@RequestMapping("/adduser")
 	@ResponseBody
 	public ResponseEntity<Integer> createNewAccount(User u) {
-		u = new User("controller", "test", "testfirst", "testlast", "test@mail.com",
-				0, 0, 800.00, "teststreet", "testcity", "teststate", "testzip");
 		return new ResponseEntity<>(userService.addUser(u), HttpStatus.OK);
 	}
 	
 	@RequestMapping("/delete")
 	@ResponseBody
 	public ResponseEntity<Boolean> deleteAccount(User u) {
-		u.setId(21);
+		u.setId(21); //used for testing, remove once userId is passed
 		return new ResponseEntity<>(userService.deleteUser(u), HttpStatus.OK);
 	}
 	

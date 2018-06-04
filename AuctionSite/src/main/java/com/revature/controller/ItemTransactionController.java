@@ -1,5 +1,8 @@
 package com.revature.controller;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -10,29 +13,25 @@ import com.revature.beans.Item;
 import com.revature.beans.ItemTransaction;
 import com.revature.beans.User;
 
+import com.revature.service.ItemTransactionService;
+
 @Controller("itemTransactionController")
 @RequestMapping("/transaction")
 public class ItemTransactionController {
+	
+	@Autowired
+	private ItemTransactionService transService;
 
-	@RequestMapping("/new")
+	//adding transaction automatically done by itemController
+	
+	//updating transaction buy handled automatically, not by user
+	
+	//buyer add seller's rating and review
+	@RequestMapping("/review")
 	@ResponseBody
-	public ResponseEntity<String> newItemTransaction(User u, Item i) {
-		System.out.println("newItemTransaction started");
-		ItemTransaction t = new ItemTransaction();
-		System.out.println("newItemTransaction itemTransaction");
-		System.out.println("testing u");
-		System.out.println(u.toString());
-		System.out.println("done");
-		System.out.println("testing i");
-		System.out.println(i.toString());
-		System.out.println("done");
-		System.out.println("Setting sellerId to trans");
-		t.setSellerId(u);
-		System.out.println("Setting itemId to trans");
-		t.setItemId(i);
+	public ResponseEntity<String> reviewItemTransaction(HttpSession session, User u, Item i) {
 		
-
-		return new ResponseEntity<>("New item and transaction created", HttpStatus.OK);
+		return new ResponseEntity<>("Transaction Review updated", HttpStatus.OK);
 
 	}
 }
