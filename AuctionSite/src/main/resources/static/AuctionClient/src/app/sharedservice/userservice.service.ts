@@ -14,7 +14,7 @@ import { User } from '../user';
   providedIn: 'root'
 })
 export class UserserviceService {
-  private baseUrl:string ='http://localhost:8089/AuctionSite/user/';
+  private baseUrl:string ='http://localhost:8080/AuctionSite/user/';
   private headers = new Headers({'content-Type': 'application/json'});
   private options = new RequestOptions({headers:this.headers});
 
@@ -23,7 +23,7 @@ export class UserserviceService {
   }
   getUser(user:User):Observable<Object>{
     console.log("shivam");
-    return this.http.get(this.baseUrl+'/login',this.options).pipe(map((response:Response) => response.json()));
+    return this.http.get(this.baseUrl+'login',this.options).pipe(map((response:Response) => response.json()));
   }
   errorHandler(error :Response){
     return Observable.throw(error || "serverError");

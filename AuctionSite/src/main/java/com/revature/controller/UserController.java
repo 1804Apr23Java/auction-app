@@ -27,8 +27,8 @@ public class UserController {
 	@RequestMapping("/login")
 	@ResponseBody
 	public ResponseEntity<User> loginUserAccount(User u) {
-		u.setUsername("testname1");
-		u.setPassword("testpassword");
+		//u.setUsername("testname1");
+		//u.setPassword("testpassword");
 		System.out.println("test");
 		return new ResponseEntity<>(userService.login(u), HttpStatus.OK);
 	}
