@@ -20,40 +20,29 @@ public class ItemTransactionRepository {
 
 	@Autowired
 	SessionFactory sessionFactory;
+	
 	public int createTransaction(ItemTransaction t) {
-		Session s = HibernateUtil.getSession();
-		Transaction tx = s.beginTransaction();
+		Session s = sessionFactory.getCurrentSession();
 		//result returns pk of new item. 
 		int result = (Integer) s.save(t);
-		tx.commit();
-		s.close();
 		return result;
 	}
 	
 	public ItemTransaction getTransactionInfo(ItemTransaction t) {
 		ItemTransaction transaction = null;
-		Session s = HibernateUtil.getSession();
+		Session s = sessionFactory.getCurrentSession();
 		transaction = (ItemTransaction) s.get(Transaction.class, t.getId());
-		s.close();
 
 		return transaction;
 	}
 	
-	public boolean deleteTransaction(Item i) {
-		Session s = HibernateUtil.getSession();
-		Transaction tx = null;
+	public boolean deleteTransaction(ItemTransaction t) {
+		Session s = sessionFactory.getCurrentSession();
 		try {
-			tx = s.beginTransaction();
-			s.delete(i);
-			tx.commit();
+			s.delete(t);
 			return true;
 		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-		} finally {
-			s.close();
+			return false;
 		}
-		return false;
 	}
 }

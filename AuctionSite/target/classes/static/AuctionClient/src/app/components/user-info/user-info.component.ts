@@ -16,7 +16,7 @@ export class UserInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.login();
+   
     }
 
     public login():void{

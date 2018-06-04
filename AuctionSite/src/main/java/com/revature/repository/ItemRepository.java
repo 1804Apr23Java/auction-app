@@ -26,27 +26,23 @@ public class ItemRepository {
 	@Autowired
 	SessionFactory sessionFactory;
 
+	
+	// result returns pk of new item.
 	public int addItem(Item i) {
-		Session s = HibernateUtil.getSession();
-		Transaction tx = s.beginTransaction();
-		// result returns pk of new item.
+		Session s = sessionFactory.getCurrentSession();
 		int result = (Integer) s.save(i);
-		tx.commit();
-		s.close();
 		return result;
 	}
 
 	public Item getItemInfo(Item i) {
+		Session s = sessionFactory.getCurrentSession();
 		Item item = null;
-		Session s = HibernateUtil.getSession();
 		item = (Item) s.get(Item.class, i.getId());
-		s.close();
-
 		return item;
 	}
 	
 	public List<Item> getAllItemsBySeller(int sellerId) {
-		Session s = HibernateUtil.getSession();
+		Session s = sessionFactory.getCurrentSession();
 		Criteria cr = s.createCriteria(Item.class);
 		cr.add(Restrictions.eq("sellerId", sellerId)).list();
 		List<Item> results = cr.list();
@@ -54,39 +50,24 @@ public class ItemRepository {
 	}
 
 	public boolean updateItem(Item i) {
-		Session s = HibernateUtil.getSession();
-		Transaction tx = null;
+		Session s = sessionFactory.getCurrentSession();
 		try {
-			tx = s.beginTransaction();
 			s.merge(i);
-			tx.commit();
 			return true;
 		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-		} finally {
-			s.close();
+			return false;
 		}
-		return false;
+
 	}
 
-	public boolean deleteUser(Item i) {
-		Session s = HibernateUtil.getSession();
-		Transaction tx = null;
+	public boolean deleteItem(Item i) {
+		Session s = sessionFactory.getCurrentSession();
 		try {
-			tx = s.beginTransaction();
 			s.delete(i);
-			tx.commit();
 			return true;
 		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-		} finally {
-			s.close();
+			return false;
 		}
-		return false;
 	}
 
 }

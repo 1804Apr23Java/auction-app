@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.revature.beans.Item;
 import com.revature.beans.User;
@@ -27,7 +26,9 @@ public class ItemController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public String addingItem(HttpSession session, User u, Item i) {
+		System.out.println("testing sessions");
 		u.setId((Integer) session.getAttribute("userId"));
+		System.out.println(session.getAttribute("userId"));
 		i.setSellerId(u.getId());
 		i.setId((Integer) itemService.addItem(i));
 		System.out.println("creating transcontroller");
