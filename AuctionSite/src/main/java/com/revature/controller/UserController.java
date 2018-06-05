@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,11 +29,11 @@ public class UserController {
 	
 	@RequestMapping("/login")
 	@ResponseBody
-	public ResponseEntity<User> loginUserAccount(HttpSession session, User u) throws Exception {
+	public ResponseEntity<User> loginUserAccount(HttpSession session, @RequestBody User u) throws Exception {
 
 		
-		u.setUsername("testname1");
-		u.setPassword("testpassword");
+		//u.setUsername("testname1");
+		//u.setPassword("testpassword");
 
 		System.out.println(u.getUsername());
 		System.out.println(u.getPassword());
