@@ -30,7 +30,7 @@ public class ItemTransactionController {
 	@RequestMapping("/review")
 	@ResponseBody
 	public ResponseEntity<String> reviewItemTransaction(HttpSession session, User u, Item i) {
-		//transService.
+		
 		return new ResponseEntity<>("Transaction Review updated", HttpStatus.OK);
 
 	}

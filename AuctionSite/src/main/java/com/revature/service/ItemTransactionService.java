@@ -31,8 +31,4 @@ public class ItemTransactionService {
 		return id;
 	}
 	
-	public void updateItemTransaction(User u, Item i) {
-		
-	}
-	
 }

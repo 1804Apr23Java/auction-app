@@ -29,8 +29,6 @@ public class UserController {
 	@RequestMapping("/login")
 	@ResponseBody
 	public ResponseEntity<User> loginUserAccount(HttpSession session, User u) throws Exception {
-		System.out.println(u.getUsername());
-		System.out.println(u.getPassword());
 		User user = userService.login(u);
 		if (user !=null) {
 			session.setAttribute("userId", user.getId());

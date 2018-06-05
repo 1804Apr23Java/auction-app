@@ -44,7 +44,8 @@ public class ItemRepository {
 	public List<Item> getAllItemsBySeller(int sellerId) {
 		Session s = sessionFactory.getCurrentSession();
 		Criteria cr = s.createCriteria(Item.class);
-		List<Item> results = cr.add(Restrictions.eq("sellerId", sellerId)).list();
+		cr.add(Restrictions.eq("sellerId", sellerId)).list();
+		List<Item> results = cr.list();
 		return results;
 	}
 	
