@@ -29,14 +29,19 @@ public class UserController {
 	@RequestMapping("/login")
 	@ResponseBody
 	public ResponseEntity<User> loginUserAccount(HttpSession session, User u) throws Exception {
+		
+		u.setUsername("testname1");
+		u.setPassword("testpassword");
+		
 		User user = userService.login(u);
+		
 		if (user !=null) {
 			session.setAttribute("userId", user.getId());
 		}
 		else {
 			throw new Exception("Invalid username or password");
 		}
-		return new ResponseEntity<>(user, HttpStatus.OK);
+				return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
 	@RequestMapping("/logout")
