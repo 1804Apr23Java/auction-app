@@ -2,9 +2,10 @@ package com.revature.repository;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -29,10 +30,18 @@ public class ItemTransactionRepository {
 		return result;
 	}
 	
-	public ItemTransaction getTransactionInfo(ItemTransaction t) {
+	public ItemTransaction getTransactionInfoViaPk(ItemTransaction t) {
 		ItemTransaction transaction = null;
 		Session s = sessionFactory.getCurrentSession();
-		transaction = (ItemTransaction) s.get(Transaction.class, t.getId());
+		transaction = (ItemTransaction) s.get(ItemTransaction.class, t.getId());
+
+		return transaction;
+	}
+	
+	public ItemTransaction getTransactionInfoViaItem(Item i) {
+		ItemTransaction transaction = null;
+		Session s = sessionFactory.getCurrentSession();
+		Criteria cr = s.createCriteria(ItemTransaction.class).add(Restrictions.eq("item.id", i.getId()));	
 
 		return transaction;
 	}

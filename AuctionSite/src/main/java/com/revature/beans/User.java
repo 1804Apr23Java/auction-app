@@ -1,6 +1,7 @@
 package com.revature.beans;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -94,9 +95,18 @@ public class User implements Serializable {
 	
 	@Column(name="ZIP_CODE", nullable=false)
 	private String zipcode;
-
-
-
+	
+	//private List<Item> userItems;
+/*
+	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="USERS")
+	public List<Item> getItems() {
+		return userItems;
+	}
+	
+	public void setItems(List<Item> userItems) {
+		this.userItems = userItems;
+	}
+*/
 	public int getId() {
 		return id;
 	}
