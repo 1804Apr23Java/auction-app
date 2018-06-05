@@ -29,10 +29,14 @@ public class UserController {
 	@RequestMapping("/login")
 	@ResponseBody
 	public ResponseEntity<User> loginUserAccount(HttpSession session, User u) throws Exception {
+
 		
 		u.setUsername("testname1");
 		u.setPassword("testpassword");
-		
+
+		System.out.println(u.getUsername());
+		System.out.println(u.getPassword());
+
 		User user = userService.login(u);
 		
 		if (user !=null) {
