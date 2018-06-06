@@ -3,8 +3,11 @@ package com.revature.beans;
 
 import java.io.Serializable;
 import java.security.Timestamp;
+import java.util.Date;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name="ITEM")
@@ -14,8 +17,8 @@ public class Item implements Serializable {
 
 
 	
-	public Item(int id, String itemName, Timestamp timeLimit, String categoryTag, String description, String image,
-			double currentPrice, int sellerId, User currentBuyer) {
+	public Item(int id, String itemName, Date timeLimit, String categoryTag, String description, String image,
+			double currentPrice, int sellerId, int currentBuyer) {
 		super();
 		this.id = id;
 		this.itemName = itemName;
@@ -25,11 +28,11 @@ public class Item implements Serializable {
 		this.image = image;
 		this.currentPrice = currentPrice;
 		this.sellerId = sellerId;
-		this.currentBuyer = currentBuyer;
+		this.buyerId = currentBuyer;
 	}
 	
-	public Item(String itemName, Timestamp timeLimit, String categoryTag, String description, String image,
-			double currentPrice, int sellerId, User currentBuyer) {
+	public Item(String itemName, Date timeLimit, String categoryTag, String description, String image,
+			double currentPrice, int sellerId, int currentBuyer) {
 		super();
 		this.itemName = itemName;
 		this.timeLimit = timeLimit;
@@ -38,7 +41,7 @@ public class Item implements Serializable {
 		this.image = image;
 		this.currentPrice = currentPrice;
 		this.sellerId = sellerId;
-		this.currentBuyer = currentBuyer;
+		this.buyerId = currentBuyer;
 	}
 
 	public Item() {
@@ -54,8 +57,10 @@ public class Item implements Serializable {
 	@Column(name = "ITEM_NAME", nullable=false)
 	private String itemName;
 
-	@Column(name = "TIME_LIMIT", nullable=true)
-	private Timestamp timeLimit;
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "TIME_LIMIT", updatable=false)
+	private Date timeLimit;
 
 	@Column(name = "CATEGORY_TAG", nullable=false)
 	private String categoryTag;
@@ -74,9 +79,8 @@ public class Item implements Serializable {
 	@Column(name = "SELLER_ID", nullable=false)
 	private int sellerId;
 	
-	@ManyToOne
-	@JoinColumn(name = "CURRENT_BUYER")
-	private User currentBuyer;
+	@Column(name = "CURRENT_BUYER")
+	private int buyerId;
 
 	public int getId() {
 		return id;
@@ -94,11 +98,11 @@ public class Item implements Serializable {
 		this.itemName = itemName;
 	}
 
-	public Timestamp getTimeLimit() {
+	public Date getTimeLimit() {
 		return timeLimit;
 	}
 
-	public void setTimeLimit(Timestamp timeLimit) {
+	public void setTimeLimit(Date timeLimit) {
 		this.timeLimit = timeLimit;
 	}
 
@@ -126,12 +130,12 @@ public class Item implements Serializable {
 		this.currentPrice = currentPrice;
 	}
 
-	public User getCurrentBuyer() {
-		return currentBuyer;
+	public int getCurrentBuyer() {
+		return buyerId;
 	}
 
-	public void setCurrentBuyer(User currentBuyer) {
-		this.currentBuyer = currentBuyer;
+	public void setCurrentBuyer(int buyerId) {
+		this.buyerId = buyerId;
 	}
 
 	public String getImage() {
@@ -154,7 +158,7 @@ public class Item implements Serializable {
 	public String toString() {
 		return "Item [id=" + id + ", itemName=" + itemName + ", timeLimit=" + timeLimit + ", categoryTag=" + categoryTag
 				+ ", description=" + description + ", image=" + image + ", currentPrice=" + currentPrice + ", sellerId="
-				+ sellerId + ", currentBuyer=" + currentBuyer + "]";
+				+ sellerId + ", buyerId=" + buyerId + "]";
 	}
 
 }

@@ -12,7 +12,7 @@ public class ItemTransaction implements Serializable {
 	
 	
 	
-	public ItemTransaction(int id, Item itemId, User sellerId, User buyerId, int sellerRating,
+	public ItemTransaction(int id, int itemId, int sellerId, int buyerId, int sellerRating,
 			String sellerReview) {
 		super();
 		this.id = id;
@@ -23,7 +23,7 @@ public class ItemTransaction implements Serializable {
 		this.sellerReview = sellerReview;
 	}
 	
-	public ItemTransaction(Item itemId, User sellerId, User buyerId, int sellerRating,
+	public ItemTransaction(int itemId, int sellerId, int buyerId, int sellerRating,
 			String sellerReview) {
 		super();
 		this.itemId = itemId;
@@ -44,17 +44,16 @@ public class ItemTransaction implements Serializable {
 	@Column(name = "TRANSACTION_ID")
 	private int id;
 
-	@ManyToOne
 	@JoinColumn(name = "ITEM_ID", nullable=false)
-	private Item itemId;
+	private int itemId;
 	
-	@ManyToOne
-	@JoinColumn(name = "SELLER_ID", nullable=false)
-	private User sellerId;
+
+	@Column(name = "SELLER_ID", nullable=false)
+	private int sellerId;
 	
-	@ManyToOne
-	@JoinColumn(name = "BUYER_ID")
-	private User buyerId;
+
+	@Column(name = "BUYER_ID")
+	private int buyerId;
 	
 	@Column(name = "SELLER_RATING")
 	private int sellerRating;
@@ -72,27 +71,27 @@ public class ItemTransaction implements Serializable {
 		this.id = id;
 	}
 
-	public Item getItemId() {
+	public int getItemId() {
 		return itemId;
 	}
 
-	public void setItemId(Item itemId) {
+	public void setItemId(int itemId) {
 		this.itemId = itemId;
 	}
 
-	public User getSellerId() {
+	public int getSellerId() {
 		return sellerId;
 	}
 
-	public void setSellerId(User sellerId) {
+	public void setSellerId(int sellerId) {
 		this.sellerId = sellerId;
 	}
 
-	public User getBuyerId() {
+	public int getBuyerId() {
 		return buyerId;
 	}
 
-	public void setBuyerId(User buyerId) {
+	public void setBuyerId(int buyerId) {
 		this.buyerId = buyerId;
 	}
 

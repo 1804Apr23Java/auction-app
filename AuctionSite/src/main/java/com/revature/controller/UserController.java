@@ -49,20 +49,22 @@ public class UserController {
 	@RequestMapping("/checkuser")
 	@ResponseBody
 	public ResponseEntity<User> checkUserAccount(User u) {
-		u.setUsername("testname3"); //used for testing, remove once username param is passed
+		u.setUsername("test"); //used for testing, remove once username param is passed
 		return new ResponseEntity<>(userService.checkUser(u), HttpStatus.OK);
 	}
 	
 	@RequestMapping("/adduser")
 	@ResponseBody
 	public ResponseEntity<Integer> createNewAccount(User u) {
-		return new ResponseEntity<>(userService.addUser(u), HttpStatus.OK);
+		//User p = new User("test", "pass", "first", "last", "mail", 0, 0, 0, "street", "city", "state", "zip");
+		User p = new User("test2", "pass2", "first2", "last2", "mail2", 0, 0, 0, "street2", "city2", "state2", "zip2");
+		return new ResponseEntity<>(userService.addUser(p), HttpStatus.OK);
 	}
 	
 	@RequestMapping("/delete")
 	@ResponseBody
 	public ResponseEntity<Boolean> deleteAccount(User u) {
-		u.setId(21); //used for testing, remove once userId is passed
+		u.setId(105); //used for testing, remove once userId is passed
 		return new ResponseEntity<>(userService.deleteUser(u), HttpStatus.OK);
 	}
 	

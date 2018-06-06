@@ -9,26 +9,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.revature.beans.Item;
 import com.revature.beans.ItemTransaction;
-import com.revature.util.HibernateUtil;
 
-@Repository(value="transactionRepository")
+@Repository(value = "transactionRepository")
 @Transactional
 @EnableTransactionManagement
 public class ItemTransactionRepository {
 
 	@Autowired
 	SessionFactory sessionFactory;
-	
+
 	public int createTransaction(ItemTransaction t) {
 		Session s = sessionFactory.getCurrentSession();
 		System.out.println(t.toString());
-		//result returns pk of new item. 
+		// result returns pk of new item.
 		int result = (Integer) s.save(t);
 		return result;
 	}
-	
+
 	public ItemTransaction getTransactionInfo(ItemTransaction t) {
 		ItemTransaction transaction = null;
 		Session s = sessionFactory.getCurrentSession();
@@ -36,7 +34,7 @@ public class ItemTransactionRepository {
 
 		return transaction;
 	}
-	
+
 	public boolean deleteTransaction(ItemTransaction t) {
 		Session s = sessionFactory.getCurrentSession();
 		try {

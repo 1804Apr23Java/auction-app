@@ -12,6 +12,6 @@ public class HomePageController {
 
 	@GetMapping(value="/homepage")
 	public String homePage() {
-		return "test";
+		return "forward:/views/test.html";
 	}
 }

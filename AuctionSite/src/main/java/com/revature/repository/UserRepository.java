@@ -34,6 +34,7 @@ public class UserRepository {
 	}
 
 	//For Superusers, get all users
+	@SuppressWarnings("unchecked")
 	public List<User> getUsers() {
 		List<User> users = new ArrayList<User>();
 		Session s = sessionFactory.getCurrentSession();
@@ -75,7 +76,8 @@ public class UserRepository {
 
 	}
 
-	//For Superusers, get all banned accounds
+	//For Superusers, get all banned accounts
+	@SuppressWarnings("unchecked")
 	public List<User> getAllBannedUsers() {
 		Session s = sessionFactory.getCurrentSession();
 		Criteria cr = s.createCriteria(User.class);
@@ -99,7 +101,8 @@ public class UserRepository {
 	public boolean deleteUser(User u) {
 		Session s = sessionFactory.getCurrentSession();
 		try {
-			s.delete(u);
+			User user = (User) s.load(User.class, u.getId());
+			s.delete(user);
 			return true;
 		} catch (Exception e) {
 			return false;

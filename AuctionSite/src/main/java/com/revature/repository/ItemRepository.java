@@ -5,18 +5,14 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.revature.beans.Item;
-import com.revature.beans.User;
-import com.revature.util.HibernateUtil;
 
 @Repository(value = "itemRepository")
 @Transactional
@@ -26,7 +22,6 @@ public class ItemRepository {
 	@Autowired
 	SessionFactory sessionFactory;
 
-	
 	// result returns pk of new item.
 	public int addItem(Item i) {
 		Session s = sessionFactory.getCurrentSession();
@@ -40,7 +35,8 @@ public class ItemRepository {
 		item = (Item) s.get(Item.class, i.getId());
 		return item;
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	public List<Item> getAllItemsBySeller(int sellerId) {
 		Session s = sessionFactory.getCurrentSession();
 		Criteria cr = s.createCriteria(Item.class);
@@ -48,7 +44,8 @@ public class ItemRepository {
 		List<Item> results = cr.list();
 		return results;
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	public List<Item> getAllItemsByCategory(String category) {
 		Session s = sessionFactory.getCurrentSession();
 		Criteria cr = s.createCriteria(Item.class);
@@ -60,7 +57,8 @@ public class ItemRepository {
 	public boolean updateItem(Item i) {
 		Session s = sessionFactory.getCurrentSession();
 		try {
-			s.merge(i);
+			Item item = (Item) s.load(Item.class, i.getId());
+			s.update(item);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -71,11 +69,13 @@ public class ItemRepository {
 	public boolean deleteItem(Item i) {
 		Session s = sessionFactory.getCurrentSession();
 		try {
-			s.delete(i);
+			Item item = (Item) s.load(Item.class, i.getId());
+			item.setCurrentBuyer(i.getCurrentBuyer());
+			item.setCurrentPrice(i.getCurrentPrice());
+			s.delete(item);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
 	}
-
 }

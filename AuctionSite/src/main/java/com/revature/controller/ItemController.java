@@ -61,7 +61,7 @@ public class ItemController {
 	@RequestMapping("/getBySeller")
 	@ResponseBody
 	public ResponseEntity<List<Item>> getItemsBySeller(User u) { 
-		u.setId(9); //Used for testing db. Remove when done
+		u.setId(104); //Used for testing db. Remove when done
 		return new ResponseEntity<>(itemService.getItemsBySeller(u.getId()), HttpStatus.OK);
 	}
 	
@@ -70,6 +70,15 @@ public class ItemController {
 	public ResponseEntity<Item> getItemInformation(Item i) {
 		i.setId(23); //Used for testing db. Remove when done
 		return new ResponseEntity<>(itemService.getItemInfo(i), HttpStatus.OK);
+	}
+	
+	@RequestMapping("/bid")
+	@ResponseBody
+	public ResponseEntity<Boolean> bidItem(User u, double price, Item i) {
+		u.setId(99); //Used for testing db. Remove when done
+		price = 99; //Used for testing db. Remove when done
+		i.setId(99); //Used for testing db. Remove when done
+		return new ResponseEntity<>(itemService.newBid(u, price, i), HttpStatus.OK);
 	}
 	
 }

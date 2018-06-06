@@ -24,8 +24,8 @@ public class ItemTransactionService {
 	public int addItemTransaction(User u, Item i) {
 		//User p = ip.userInfoViaKey(u);
 		ItemTransaction transactionBean = new ItemTransaction();
-		transactionBean.setSellerId(u);
-		transactionBean.setItemId(i);
+		transactionBean.setSellerId(u.getId());
+		transactionBean.setItemId(i.getId());
 		System.out.println(transactionBean.toString());
 		int id = transaction.createTransaction(transactionBean);
 		return id;

@@ -1,9 +1,11 @@
 package com.revature.beans;
 
 import java.io.Serializable;
-import java.security.Timestamp;
+import java.util.Date;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name="BIDDING_HISTORY")
@@ -12,7 +14,7 @@ public class BiddingHistory implements Serializable {
 	private static final long serialVersionUID = -8347365985841545839L;
 	
 	
-	public BiddingHistory(int id, Item itemId, User buyerId, double badePrice, Timestamp time) {
+	public BiddingHistory(int id, int itemId, int buyerId, double badePrice, Date time) {
 		super();
 		this.id = id;
 		this.itemId = itemId;
@@ -21,7 +23,7 @@ public class BiddingHistory implements Serializable {
 		this.time = time;
 	}
 	
-	public BiddingHistory(Item itemId, User buyerId, double badePrice, Timestamp time) {
+	public BiddingHistory(int itemId, int buyerId, double badePrice, Date time) {
 		super();
 		this.itemId = itemId;
 		this.buyerId = buyerId;
@@ -40,19 +42,19 @@ public class BiddingHistory implements Serializable {
 	@Column(name = "BIDDING_ID")
 	private int id;
 	
-	@ManyToOne
-	@JoinColumn(name = "ITEM_ID", nullable=false)
-	private Item itemId;
-	
-	@ManyToOne
-	@JoinColumn(name = "BUYER_ID", nullable=false)
-	private User buyerId;
+	@Column(name = "ITEM_ID", nullable=false)
+	private int itemId;
+
+	@Column(name = "BUYER_ID", nullable=false)
+	private int buyerId;
 	
 	@Column(name = "BADE_PRICE", nullable=false)
 	private double badePrice;
 	
-	@Column(name = "TIME", nullable=false)
-	private Timestamp time;
+	@CreationTimestamp
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "TIME", updatable=false)
+	private Date time;
 
 	public int getId() {
 		return id;
@@ -62,19 +64,19 @@ public class BiddingHistory implements Serializable {
 		this.id = id;
 	}
 
-	public Item getItemId() {
+	public int getItemId() {
 		return itemId;
 	}
 
-	public void setItemId(Item itemId) {
+	public void setItemId(int itemId) {
 		this.itemId = itemId;
 	}
 
-	public User getBuyerId() {
+	public int getBuyerId() {
 		return buyerId;
 	}
 
-	public void setBuyerId(User buyerId) {
+	public void setBuyerId(int buyerId) {
 		this.buyerId = buyerId;
 	}
 
@@ -86,11 +88,11 @@ public class BiddingHistory implements Serializable {
 		this.badePrice = badePrice;
 	}
 
-	public Timestamp getTime() {
+	public Date getTime() {
 		return time;
 	}
 
-	public void setTime(Timestamp time) {
+	public void setTime(Date time) {
 		this.time = time;
 	}
 

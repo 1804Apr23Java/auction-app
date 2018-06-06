@@ -31,17 +31,17 @@ public class UserService {
 	}
 	
 	public boolean deleteUser(User u) {
-		boolean x = ur.deleteUser(u);
-		return x;
+		boolean result = ur.deleteUser(u);
+		return result;
 	}
 	
 	public List<User> getAllUsersByBan() {
-		List<User> x = ur.getAllBannedUsers();
-		return x;
+		List<User> users = ur.getAllBannedUsers();
+		return users;
 	}
 	
 	public List<User> getAllUsers() {
-		List<User> x = ur.getUsers();
-		return x;
+		List<User> users = ur.getUsers();
+		return users;
 	}
 }

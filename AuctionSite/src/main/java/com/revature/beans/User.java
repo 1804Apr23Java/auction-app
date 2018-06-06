@@ -7,8 +7,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
-@DynamicUpdate
-@Table(name="USERS")
+@Table(name="PROFILE")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = -6686626961005563005L;
@@ -71,7 +70,7 @@ public class User implements Serializable {
 	@Column(name="LAST_NAME", nullable=false)
 	private String lastName;
 	
-	@Column(name="EMAIL", nullable=false, unique=true)
+	@Column(name="EMAIL", nullable=true, unique=true)
 	private String email;
 	
 	@Column(name="ADMIN_VALUE", nullable=false)
@@ -83,16 +82,16 @@ public class User implements Serializable {
 	@Column(name="BALANCE", nullable=false)
 	private double balance = 0.00;
 	
-	@Column(name="STREET", nullable=false)
+	@Column(name="STREET", nullable=true)
 	private String street;
 	
-	@Column(name="CITY", nullable=false)
+	@Column(name="CITY", nullable=true)
 	private String city;
 	
-	@Column(name="STATE", nullable=false)
+	@Column(name="STATE", nullable=true)
 	private String state;
 	
-	@Column(name="ZIP_CODE", nullable=false)
+	@Column(name="ZIP_CODE", nullable=true)
 	private String zipcode;
 
 
