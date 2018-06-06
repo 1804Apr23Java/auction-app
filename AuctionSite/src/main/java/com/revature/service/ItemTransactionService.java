@@ -7,22 +7,15 @@ import com.revature.beans.Item;
 import com.revature.beans.ItemTransaction;
 import com.revature.beans.User;
 import com.revature.repository.ItemTransactionRepository;
-import com.revature.repository.UserRepository;
-import com.revature.repository.ItemRepository;
 
-
-@Service(value="itemTransactionService")
+@Service(value = "itemTransactionService")
 public class ItemTransactionService {
 
 	@Autowired
 	private ItemTransactionRepository transaction;
-	
-	@Autowired
-	private UserRepository ip;
 
-	
 	public int addItemTransaction(User u, Item i) {
-		//User p = ip.userInfoViaKey(u);
+		// User p = ip.userInfoViaKey(u);
 		ItemTransaction transactionBean = new ItemTransaction();
 		transactionBean.setSellerId(u.getId());
 		transactionBean.setItemId(i.getId());
@@ -30,5 +23,11 @@ public class ItemTransactionService {
 		int id = transaction.createTransaction(transactionBean);
 		return id;
 	}
-	
+
+	public boolean giveReview(ItemTransaction t) {
+		boolean result = transaction.giveReview(t);
+		return result;
+
+	}
+
 }

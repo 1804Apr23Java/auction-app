@@ -54,14 +54,13 @@ public class ItemService {
 		return results;
 	}
 
-	public boolean newBid(User u, double price, Item i) {
+	public boolean newBid(User u, Item i) {
 		i.setCurrentBuyer(u.getId());
-		i.setCurrentPrice(price);
 		boolean itemResult = ir.updateItem(i);
 		if (itemResult == true) {
 			BiddingHistory bh = new BiddingHistory();
 			bh.setBuyerId(u.getId());
-			bh.setBadePrice(price);
+			bh.setBadePrice(i.getCurrentPrice());
 			bh.setItemId(i.getId());
 			br.addBiddingHistory(bh);
 			return true;

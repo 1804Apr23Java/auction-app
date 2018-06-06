@@ -58,6 +58,8 @@ public class ItemRepository {
 		Session s = sessionFactory.getCurrentSession();
 		try {
 			Item item = (Item) s.load(Item.class, i.getId());
+			item.setCurrentBuyer(i.getCurrentBuyer());
+			item.setCurrentPrice(i.getCurrentPrice());
 			s.update(item);
 			return true;
 		} catch (Exception e) {
@@ -70,8 +72,6 @@ public class ItemRepository {
 		Session s = sessionFactory.getCurrentSession();
 		try {
 			Item item = (Item) s.load(Item.class, i.getId());
-			item.setCurrentBuyer(i.getCurrentBuyer());
-			item.setCurrentPrice(i.getCurrentPrice());
 			s.delete(item);
 			return true;
 		} catch (Exception e) {

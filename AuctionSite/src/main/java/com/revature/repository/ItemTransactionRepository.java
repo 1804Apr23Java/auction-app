@@ -2,6 +2,7 @@ package com.revature.repository;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -33,6 +34,25 @@ public class ItemTransactionRepository {
 		transaction = (ItemTransaction) s.get(Transaction.class, t.getId());
 
 		return transaction;
+	}
+
+	public boolean giveReview(ItemTransaction t) {
+		Session s = sessionFactory.getCurrentSession();
+		try {
+			Query query = s.createQuery("FROM ItemTransaction where itemId = :itemId");
+			query.setInteger("itemId", t.getItemId());
+			ItemTransaction transaction = (ItemTransaction) query.uniqueResult();
+			System.out.println(t.getSellerId());
+			System.out.println(t.getSellerRating());
+			System.out.println(t.getSellerReview());
+			transaction.setSellerRating(t.getSellerRating());
+			transaction.setSellerReview(t.getSellerReview());
+			s.update(transaction);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+
 	}
 
 	public boolean deleteTransaction(ItemTransaction t) {
