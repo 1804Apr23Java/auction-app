@@ -23,9 +23,13 @@ public class ItemRepository {
 	SessionFactory sessionFactory;
 
 	// result returns pk of new item.
-	public int addItem(Item i) {
+	public int addItem(Item i, int timeLimit) {
 		Session s = sessionFactory.getCurrentSession();
 		int result = (Integer) s.save(i);
+		System.out.println("executing query");
+		s.createSQLQuery("CALL BID_TIME(:time, :itemId)")
+		.setParameter("time", timeLimit).setParameter("itemId", i.getId()).executeUpdate();
+		System.out.println("executed query");
 		return result;
 	}
 

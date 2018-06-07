@@ -24,8 +24,8 @@ public class ItemService {
 	@Autowired
 	BiddingHistoryRepository br;
 
-	public int addItem(Item i) {
-		int id = ir.addItem(i);
+	public int addItem(Item i, int timeLimit) {
+		int id = ir.addItem(i, timeLimit);
 		return id;
 	}
 

@@ -56,8 +56,8 @@ public class Item implements Serializable {
 	@Column(name = "ITEM_NAME", nullable=false)
 	private String itemName;
 
-	@CreationTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
+	//@CreationTimestamp
+	//@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "TIME_LIMIT", updatable=false)
 	private Date timeLimit;
 

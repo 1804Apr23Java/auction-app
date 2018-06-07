@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,13 +27,13 @@ public class ItemController {
 	@Autowired
 	private ItemTransactionService transService;
 
-	@RequestMapping("/add/{")
+	@RequestMapping("/add/{itemName}/{description}/{currentPrice}/{categoryTag}/{image}/{timeLeft}")
 	@ResponseBody
-	public String addingItem(HttpSession session, User u, Item i) {
+	public String addingItem(HttpSession session, User u, Item i, @PathVariable("timeLeft") int timeLeft) {
 		try {
 			u.setId((Integer) session.getAttribute("userId"));
 			i.setSellerId(u.getId());
-			i.setId((Integer) itemService.addItem(i));
+			i.setId((Integer) itemService.addItem(i, timeLeft));
 			transService.addItemTransaction(u, i);
 			return "Added new item";
 		} catch (NullPointerException e) {
@@ -72,7 +72,7 @@ public class ItemController {
 		return new ResponseEntity<>(itemService.getItemInfo(i), HttpStatus.OK);
 	}
 
-	@RequestMapping("/bid/{}/{id}") //Buyer id
+	@RequestMapping("/bid/{id}") //Buyer id
 	@ResponseBody
 	public ResponseEntity<Boolean> bidItem(HttpSession session, Item i) {
 		try {
