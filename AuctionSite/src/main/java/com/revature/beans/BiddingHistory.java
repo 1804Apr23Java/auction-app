@@ -1,7 +1,7 @@
 package com.revature.beans;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.*;
 
@@ -51,8 +51,6 @@ public class BiddingHistory implements Serializable {
 	@Column(name = "BADE_PRICE", nullable=false)
 	private double badePrice;
 	
-	@CreationTimestamp
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "TIME", updatable=false)
 	private Date time;
 

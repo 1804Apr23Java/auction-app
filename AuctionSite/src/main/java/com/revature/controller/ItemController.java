@@ -68,20 +68,18 @@ public class ItemController {
 		return new ResponseEntity<>(itemService.getItemsBySeller(u.getId()), HttpStatus.OK);
 	}
 
-	@RequestMapping("/itemInfo/{id}") // Id of item
+	@RequestMapping("/itemInfo/{item_id}") // Id of item
 	@ResponseBody
 	public ResponseEntity<Item> getItemInformation(Item i) {
 		return new ResponseEntity<>(itemService.getItemInfo(i), HttpStatus.OK);
 	}
 
-	@RequestMapping("/bid/{id}") //Buyer id
+	@RequestMapping("/bid/{id}/{item_id}/{currentPrice}") //Buyer id, item id, new bid price
 	@ResponseBody
 	public ResponseEntity<Boolean> bidItem(HttpSession session, Item i) {
 		try {
 			User u = new User();
 			u.setId((Integer) session.getAttribute("userId"));
-			i.setCurrentPrice(99); // Used for testing db. Remove when done
-			i.setId(94); // Used for testing db. Remove when done
 			return new ResponseEntity<>(itemService.newBid(u, i), HttpStatus.OK);
 		} catch (NullPointerException e) {
 			return new ResponseEntity<>(false, HttpStatus.OK);

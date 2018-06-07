@@ -69,6 +69,10 @@ public class ItemService {
 			bh.setBuyerId(u.getId());
 			bh.setBadePrice(i.getCurrentPrice());
 			bh.setItemId(i.getId());
+			LocalDateTime a = LocalDateTime.now();
+			long millis = a.toInstant(ZoneOffset.ofTotalSeconds(0)).toEpochMilli();
+			Date date = new Date(millis);
+			bh.setTime(date);
 			br.addBiddingHistory(bh);
 			return true;
 		} else {

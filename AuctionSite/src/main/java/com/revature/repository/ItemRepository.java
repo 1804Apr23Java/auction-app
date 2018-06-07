@@ -1,18 +1,12 @@
 package com.revature.repository;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneOffset;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -60,19 +54,16 @@ public class ItemRepository {
 		return results;
 	}
 
-	public List<Item> getMostPopular() {
+	public List<Item> getMostPopular() { //not implemented yet
 		Session s = sessionFactory.getCurrentSession();
-		List<Item> itemIds  = null; // s.createQuery("Select id, COUNT(BiddingHistoryId) from Item JOIN BiddingHistory ON id = itemId GROUP BY id ORDER BY Count(BiddingHistoryId) desc").setMaxResults(7).list();
-		/*List<Item> items;
-		for (Item i : itemIds) {
-		}*/
+		List<Item> itemIds = null;
 		return itemIds;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Item> getMostRecent() {
 		Session s = sessionFactory.getCurrentSession();
-		List<Item> items  = s.createQuery("From Item order by id desc").setMaxResults(7).list();
+		List<Item> items = s.createQuery("From Item order by id desc").setMaxResults(7).list();
 		return items;
 	}
 

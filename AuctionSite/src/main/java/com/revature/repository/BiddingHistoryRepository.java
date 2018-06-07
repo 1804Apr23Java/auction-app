@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -32,7 +33,8 @@ public class BiddingHistoryRepository {
 	public List<BiddingHistory> getAllBidsByitem(int itemId) {
 		Session s = sessionFactory.getCurrentSession();
 		Criteria cr = s.createCriteria(BiddingHistory.class);
-		cr.add(Restrictions.eq("itemId", itemId)).list();
+		cr.add(Restrictions.eq("itemId", itemId));
+		cr.addOrder(Order.desc("time")).list();
 		List<BiddingHistory> results = cr.list();
 		return results;
 	}

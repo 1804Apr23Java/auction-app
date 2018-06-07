@@ -1,26 +1,20 @@
 package com.revature.beans;
 
-
 import java.io.Serializable;
 import java.sql.Date;
-import java.time.LocalDateTime;
 
 import javax.persistence.*;
 
-import org.hibernate.annotations.CreationTimestamp;
-
 @Entity
-@Table(name="ITEM")
+@Table(name = "ITEM")
 public class Item implements Serializable {
 
 	private static final long serialVersionUID = 8936579050460853453L;
 
-
-	
 	public Item(int id, String itemName, Date timeLimit, String categoryTag, String description, String image,
 			double currentPrice, int sellerId, int currentBuyer) {
 		super();
-		this.id = id;
+		this.item_id = id;
 		this.itemName = itemName;
 		this.timeLimit = timeLimit;
 		this.categoryTag = categoryTag;
@@ -30,7 +24,7 @@ public class Item implements Serializable {
 		this.sellerId = sellerId;
 		this.buyerId = currentBuyer;
 	}
-	
+
 	public Item(String itemName, Date timeLimit, String categoryTag, String description, String image,
 			double currentPrice, int sellerId, int currentBuyer) {
 		super();
@@ -52,39 +46,38 @@ public class Item implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "itemSequence")
 	@SequenceGenerator(allocationSize = 1, name = "itemSequence", sequenceName = "SQ_ITEM_PK")
 	@Column(name = "ITEM_ID")
-	private int id;
+	private int item_id;
 
-	@Column(name = "ITEM_NAME", nullable=false)
+	@Column(name = "ITEM_NAME", nullable = false)
 	private String itemName;
 
-	@Column(name = "TIME_LIMIT", updatable=false)
+	@Column(name = "TIME_LIMIT", updatable = false)
 	private Date timeLimit;
 
-	@Column(name = "CATEGORY_TAG", nullable=false)
+	@Column(name = "CATEGORY_TAG", nullable = false)
 	private String categoryTag;
 
-	
-	@Column(name = "ITEM_DESCRIPTION", nullable=false)
+	@Column(name = "ITEM_DESCRIPTION", nullable = false)
 	private String description;
-	
-	@Column(name = "IMAGE", nullable=false)
+
+	@Column(name = "IMAGE", nullable = false)
 	private String image;
 
-	@Column(name = "CURRENT_PRICE", nullable=false)
+	@Column(name = "CURRENT_PRICE", nullable = false)
 	private double currentPrice = 0.00;
 
-	@Column(name = "SELLER_ID", nullable=false)
+	@Column(name = "SELLER_ID", nullable = false)
 	private int sellerId;
-	
+
 	@Column(name = "CURRENT_BUYER")
 	private int buyerId;
 
 	public int getId() {
-		return id;
+		return item_id;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.item_id = id;
 	}
 
 	public String getItemName() {
@@ -153,7 +146,7 @@ public class Item implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Item [id=" + id + ", itemName=" + itemName + ", timeLimit=" + timeLimit + ", categoryTag=" + categoryTag
+		return "Item [id=" + item_id + ", itemName=" + itemName + ", timeLimit=" + timeLimit + ", categoryTag=" + categoryTag
 				+ ", description=" + description + ", image=" + image + ", currentPrice=" + currentPrice + ", sellerId="
 				+ sellerId + ", buyerId=" + buyerId + "]";
 	}
