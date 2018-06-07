@@ -5,8 +5,10 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,6 +29,8 @@ public class ItemRepository {
 		Session s = sessionFactory.getCurrentSession();
 		int result = (Integer) s.save(i);
 		System.out.println("executing query");
+		System.out.println(timeLimit);
+		System.out.println(i.getId());
 		s.createSQLQuery("CALL BID_TIME(:time, :itemId)")
 		.setParameter("time", timeLimit).setParameter("itemId", i.getId()).executeUpdate();
 		System.out.println("executed query");
@@ -56,6 +60,23 @@ public class ItemRepository {
 		cr.add(Restrictions.eq("categoryTag", category)).list();
 		List<Item> results = cr.list();
 		return results;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Item> getMostPopular() {
+		Session s = sessionFactory.getCurrentSession();
+		List<Item> itemIds  = s.createQuery("Select Item.id, COUNT(BiddingHistory.id) from Item JOIN BiddingHistory ON Item.id = BiddingHistory.itemId GROUP BY Item.id ORDER BY Count(BiddingHistory.id) desc").setMaxResults(7).list();
+		/*List<Item> items;
+		for (Item i : itemIds) {
+		}*/
+		return itemIds;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Item> getMostRecent() {
+		Session s = sessionFactory.getCurrentSession();
+		List<Item> items  = s.createQuery("From Item order by id desc").setMaxResults(7).list();
+		return items;
 	}
 
 	public boolean updateItem(Item i) {

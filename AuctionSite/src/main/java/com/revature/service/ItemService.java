@@ -29,13 +29,13 @@ public class ItemService {
 		return id;
 	}
 
-	public List<Item> getPopular(Item i) {
-		List<Item> results = null;
+	public List<Item> getPopular() {
+		List<Item> results = ir.getMostPopular();
 		return results;
 	}
 
-	public List<Item> getRecent(Item i) {
-		List<Item> results = null;
+	public List<Item> getRecent() {
+		List<Item> results = ir.getMostRecent();
 		return results;
 	}
 

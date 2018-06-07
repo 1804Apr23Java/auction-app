@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +19,7 @@ import com.revature.service.ItemService;
 import com.revature.service.ItemTransactionService;
 
 @Controller("itemController")
+@CrossOrigin(origins = {"http://localhost:4200"})
 @RequestMapping("/item")
 public class ItemController {
 
@@ -44,14 +46,14 @@ public class ItemController {
 
 	@RequestMapping("/getPopular")
 	@ResponseBody
-	public ResponseEntity<List<Item>> getCurrentPopularItems(Item i) {
-		return new ResponseEntity<>(itemService.getPopular(i), HttpStatus.OK);
+	public ResponseEntity<List<Item>> getCurrentPopularItems() {
+		return new ResponseEntity<>(itemService.getPopular(), HttpStatus.OK);
 	}
 
 	@RequestMapping("/getRecent")
 	@ResponseBody
-	public ResponseEntity<List<Item>> getMostRecentItems(Item i) {
-		return new ResponseEntity<>(itemService.getRecent(i), HttpStatus.OK);
+	public ResponseEntity<List<Item>> getMostRecentItems() {
+		return new ResponseEntity<>(itemService.getRecent(), HttpStatus.OK);
 	}
 
 	@RequestMapping("/getByCategory/{categoryTag}")
