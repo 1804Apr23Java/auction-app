@@ -1,5 +1,9 @@
 package com.revature.repository;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -25,15 +29,9 @@ public class ItemRepository {
 	SessionFactory sessionFactory;
 
 	// result returns pk of new item.
-	public int addItem(Item i, int timeLimit) {
+	public int addItem(Item i) {
 		Session s = sessionFactory.getCurrentSession();
 		int result = (Integer) s.save(i);
-		System.out.println("executing query");
-		System.out.println(timeLimit);
-		System.out.println(i.getId());
-		s.createSQLQuery("CALL BID_TIME(:time, :itemId)")
-		.setParameter("time", timeLimit).setParameter("itemId", i.getId()).executeUpdate();
-		System.out.println("executed query");
 		return result;
 	}
 

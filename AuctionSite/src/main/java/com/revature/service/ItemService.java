@@ -1,5 +1,8 @@
 package com.revature.service;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +28,11 @@ public class ItemService {
 	BiddingHistoryRepository br;
 
 	public int addItem(Item i, int timeLimit) {
-		int id = ir.addItem(i, timeLimit);
+		LocalDateTime a = LocalDateTime.now().plusDays(timeLimit);
+		long millis = a.toInstant(ZoneOffset.ofTotalSeconds(0)).toEpochMilli();
+		Date date = new Date(millis);
+		i.setTimeLimit(date);
+		int id = ir.addItem(i);
 		return id;
 	}
 
