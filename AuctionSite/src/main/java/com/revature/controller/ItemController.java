@@ -74,7 +74,7 @@ public class ItemController {
 		return new ResponseEntity<>(itemService.getItemInfo(i), HttpStatus.OK);
 	}
 
-	@RequestMapping("/bid/{id}/{item_id}/{currentPrice}") //Buyer id, item id, new bid price
+	@RequestMapping("/bid/{item_id}/{currentPrice}") //Seller id, item id, new bid price
 	@ResponseBody
 	public ResponseEntity<Boolean> bidItem(HttpSession session, Item i) {
 		try {
