@@ -18,7 +18,6 @@ import com.revature.service.ItemService;
 import com.revature.service.ItemTransactionService;
 
 @Controller("itemController")
-@CrossOrigin(origins = { "http://localhost:4200" })
 @RequestMapping("/item")
 public class ItemController {
 
@@ -28,7 +27,7 @@ public class ItemController {
 	@Autowired
 	private ItemTransactionService transService;
 
-	@RequestMapping("/add")
+	@RequestMapping("/add/{")
 	@ResponseBody
 	public String addingItem(HttpSession session, User u, Item i) {
 		try {
@@ -38,7 +37,7 @@ public class ItemController {
 			transService.addItemTransaction(u, i);
 			return "Added new item";
 		} catch (NullPointerException e) {
-			return "Uh oh: Probably no user logged in. Contact Danny for more info";
+			return "Uh oh: Probably no user logged in. Contact Zach for more info";
 		}
 
 	}
@@ -61,27 +60,30 @@ public class ItemController {
 		return new ResponseEntity<>(itemService.getByCategory(i), HttpStatus.OK);
 	}
 
-	@RequestMapping("/getBySeller/{id}")
+	@RequestMapping("/getBySeller/{id}") // Id of seller
 	@ResponseBody
 	public ResponseEntity<List<Item>> getItemsBySeller(User u) {
-		//u.setId(104); // Used for testing db. Remove when done
 		return new ResponseEntity<>(itemService.getItemsBySeller(u.getId()), HttpStatus.OK);
 	}
 
-	@RequestMapping("/itemInfo")
+	@RequestMapping("/itemInfo/{id}") // Id of item
 	@ResponseBody
 	public ResponseEntity<Item> getItemInformation(Item i) {
-		i.setId(23); // Used for testing db. Remove when done
 		return new ResponseEntity<>(itemService.getItemInfo(i), HttpStatus.OK);
 	}
 
-	@RequestMapping("/bid")
+	@RequestMapping("/bid/{}/{id}") //Buyer id
 	@ResponseBody
-	public ResponseEntity<Boolean> bidItem(User u, Item i) {
-		u.setId(99); // Used for testing db. Remove when done
-		i.setCurrentPrice(99); // Used for testing db. Remove when done
-		i.setId(94); // Used for testing db. Remove when done
-		return new ResponseEntity<>(itemService.newBid(u, i), HttpStatus.OK);
+	public ResponseEntity<Boolean> bidItem(HttpSession session, Item i) {
+		try {
+			User u = new User();
+			u.setId((Integer) session.getAttribute("userId"));
+			i.setCurrentPrice(99); // Used for testing db. Remove when done
+			i.setId(94); // Used for testing db. Remove when done
+			return new ResponseEntity<>(itemService.newBid(u, i), HttpStatus.OK);
+		} catch (NullPointerException e) {
+			return new ResponseEntity<>(false, HttpStatus.OK);
+		}
 	}
 
 }

@@ -25,17 +25,17 @@ public class ItemTransactionController {
 	// updating transaction buy handled automatically, not by user
 
 	// buyer add seller's rating and review
-	@RequestMapping("/review")
+	@RequestMapping("/review/{itemId}/{sellerRating}/{sellerReview}")
 	@ResponseBody
 	public ResponseEntity<String> reviewItemTransaction(HttpSession session, ItemTransaction t) {
-		// t should have ratings and reviews for seller as parameters
-		t.setItemId(94); // used for testing, remove once param is passed
-		t.setSellerRating(4); // used for testing, remove once param is passed
-		t.setSellerReview("This man is a con artist!"); // used for testing, remove once param is passed
-		t.setBuyerId((Integer) session.getAttribute("userId"));
-		transService.giveReview(t);
-
-		return new ResponseEntity<>("Transaction Review updated", HttpStatus.OK);
-
+		try {
+			// t should have ratings and reviews for seller as parameters
+			t.setBuyerId((Integer) session.getAttribute("userId"));
+			transService.giveReview(t);
+			return new ResponseEntity<>("Transaction Review updated", HttpStatus.OK);
+		} catch (NullPointerException e) {
+			return new ResponseEntity<>("Uh oh: Probably no user logged in. Contact Zach for more info",
+					HttpStatus.OK);
+		}
 	}
 }

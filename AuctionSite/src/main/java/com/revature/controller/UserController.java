@@ -15,7 +15,6 @@ import com.revature.beans.User;
 import com.revature.service.UserService;
 
 @Controller("userController")
-@CrossOrigin(origins = { "http://localhost:4200" })
 @RequestMapping("/user")
 public class UserController {
 
@@ -28,6 +27,7 @@ public class UserController {
 		User user = userService.login(u);
 		if (user != null) {
 			session.setAttribute("userId", user.getId());
+			session.setAttribute("admin", user.getAdminValue());
 		} else {
 			throw new Exception("Invalid username or password");
 		}
@@ -41,35 +41,43 @@ public class UserController {
 		return new ResponseEntity<>("Successfully logged out", HttpStatus.OK);
 	}
 
-	@RequestMapping("/{username}")
-	//@RequestMapping("/checkuser")
+	@RequestMapping("/checkuser/{username}")
 	@ResponseBody
 	public ResponseEntity<User> checkUserAccount(User u) {
-		u.setUsername("test"); // used for testing, remove once username param is passed
 		return new ResponseEntity<>(userService.checkUser(u), HttpStatus.OK);
 	}
 
-	@RequestMapping("/adduser")
+	@RequestMapping("/adduser/{username}/{password}/{firstName}/{lastName}/{email}/{street}/{city}/{state}/{zipcode}")
 	@ResponseBody
 	public ResponseEntity<Integer> createNewAccount(User u) {
-		// used for testing, remove once connection is established
-		// User p = new User("test", "pass", "first", "last", "mail", 0, 0, 0, "street",
-		// "city", "state", "zip");
-		User p = new User("test2", "pass2", "first2", "last2", "mail2", 0, 0, 0, "street2", "city2", "state2", "zip2");
-		return new ResponseEntity<>(userService.addUser(p), HttpStatus.OK);
+		return new ResponseEntity<>(userService.addUser(u), HttpStatus.OK);
 	}
 
 	@RequestMapping("/delete")
 	@ResponseBody
-	public ResponseEntity<Boolean> deleteAccount(User u) {
-		u.setId(105); // used for testing, remove once userId is passed
-		return new ResponseEntity<>(userService.deleteUser(u), HttpStatus.OK);
+	public ResponseEntity<Boolean> deleteAccount(HttpSession session, User u) {
+		try {
+			u.setId((Integer) session.getAttribute("userId"));
+			return new ResponseEntity<>(userService.deleteUser(u), HttpStatus.OK);
+		} catch (NullPointerException e) {
+			return new ResponseEntity<>(false, HttpStatus.OK);
+		}
 	}
 
 	@RequestMapping("/banned")
 	@ResponseBody
-	public ResponseEntity<List<User>> notBannedAccount() {
-		return new ResponseEntity<>(userService.getAllUsersByBan(), HttpStatus.OK);
+	public ResponseEntity<List<User>> getBannedAccounts(HttpSession session) {
+		try {
+			User u = new User();
+			u.setId((Integer) session.getAttribute("admin"));
+			if (u.getId() == 1) {
+				return new ResponseEntity<>(userService.getAllUsersByBan(), HttpStatus.OK);
+			} else {
+				return null;
+			}
+		} catch (NullPointerException e) {
+			return null;
+		}
 	}
 
 	@RequestMapping("/all")
