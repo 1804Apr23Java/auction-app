@@ -16,7 +16,7 @@ public class BiddingHistory implements Serializable {
 	
 	public BiddingHistory(int id, int itemId, int buyerId, double badePrice, Date time) {
 		super();
-		this.id = id;
+		this.biddingHistoryId = id;
 		this.itemId = itemId;
 		this.buyerId = buyerId;
 		this.badePrice = badePrice;
@@ -40,7 +40,7 @@ public class BiddingHistory implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "biddingSequence")
 	@SequenceGenerator(allocationSize = 1, name = "biddingSequence", sequenceName = "SQ_BIDDING_PK")
 	@Column(name = "BIDDING_ID")
-	private int id;
+	private int biddingHistoryId;
 	
 	@Column(name = "ITEM_ID", nullable=false)
 	private int itemId;
@@ -57,11 +57,11 @@ public class BiddingHistory implements Serializable {
 	private Date time;
 
 	public int getId() {
-		return id;
+		return biddingHistoryId;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.biddingHistoryId = id;
 	}
 
 	public int getItemId() {
@@ -98,7 +98,7 @@ public class BiddingHistory implements Serializable {
 
 	@Override
 	public String toString() {
-		return "BiddingHistory [id=" + id + ", itemId=" + itemId + ", buyerId=" + buyerId + ", badePrice=" + badePrice
+		return "BiddingHistory [id=" + biddingHistoryId + ", itemId=" + itemId + ", buyerId=" + buyerId + ", badePrice=" + badePrice
 				+ ", time=" + time + "]";
 	}
 	

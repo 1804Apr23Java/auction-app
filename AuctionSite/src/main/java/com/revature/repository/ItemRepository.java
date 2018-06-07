@@ -61,11 +61,10 @@ public class ItemRepository {
 		List<Item> results = cr.list();
 		return results;
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	public List<Item> getMostPopular() {
 		Session s = sessionFactory.getCurrentSession();
-		List<Item> itemIds  = s.createQuery("Select Item.id, COUNT(BiddingHistory.id) from Item JOIN BiddingHistory ON Item.id = BiddingHistory.itemId GROUP BY Item.id ORDER BY Count(BiddingHistory.id) desc").setMaxResults(7).list();
+		List<Item> itemIds  = null; // s.createQuery("Select id, COUNT(BiddingHistoryId) from Item JOIN BiddingHistory ON id = itemId GROUP BY id ORDER BY Count(BiddingHistoryId) desc").setMaxResults(7).list();
 		/*List<Item> items;
 		for (Item i : itemIds) {
 		}*/
